@@ -3,213 +3,175 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KALVINE LUXE — Sélection Officielle</title>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <title>DUNDLE PRO — Sélection Officielle</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #d4af37; /* Or pour le côté Premium */
+      --primary: #f26522;
       --bg: #0d0f12;
-      --card-inner: #1a1d23;
+      --card-bg: #1a1d23;
       --text: #ffffff;
-      --text-dim: #94a3b8;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg); color: var(--text); }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg); color: var(--text); line-height: 1.6; }
 
     header { padding: 1.5rem 8%; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; align-items: center; }
-    .logo { font-size: 1.5rem; font-weight: 800; color: #fff; text-decoration: none; }
+    .logo { font-size: 1.5rem; font-weight: 800; text-decoration: none; color: #fff; }
     .logo span { color: var(--primary); }
 
-    /* --- SECTION VITRINE (STATIQUE ET ÉLÉGANTE) --- */
-    .showcase { padding: 4rem 8%; text-align: center; }
-    .showcase h1 { font-size: 2.5rem; margin-bottom: 1rem; font-weight: 800; }
-    .showcase p { color: var(--text-dim); margin-bottom: 4rem; }
+    /* --- GRILLE STATIQUE (PAS DE DÉFILLEMENT) --- */
+    .catalog-section { padding: 4rem 8%; max-width: 1400px; margin: 0 auto; }
+    .catalog-header { text-align: center; margin-bottom: 4rem; }
+    .catalog-header h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 10px; }
 
-    /* Grille de présentation type "Vêtements de Luxe" */
     .product-grid { 
       display: grid; 
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-      gap: 30px; 
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+      gap: 40px; 
     }
 
     .product-card {
-      background: var(--card-inner);
-      border-radius: 24px;
-      padding: 20px;
-      border: 1px solid rgba(255,255,255,0.03);
-      transition: all 0.4s ease;
-      text-align: left;
-    }
-    .product-card:hover {
-      transform: translateY(-10px);
-      border-color: var(--primary);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-    }
-
-    /* Remplacement des blocs par des simulations d'images réelles */
-    .card-image {
-      width: 100%;
-      height: 180px;
-      border-radius: 15px;
-      margin-bottom: 20px;
-      position: relative;
+      background: var(--card-bg);
+      border-radius: 20px;
       overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.05);
+      transition: 0.3s;
+    }
+    .product-card:hover { transform: translateY(-10px); border-color: var(--primary); }
+
+    /* CONTENEUR IMAGE RÉELLE */
+    .image-container {
+      width: 100%;
+      height: 220px;
+      background: #000;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+      overflow: hidden;
     }
-    
-    /* Styles pour imiter tes photos envoyées */
-    .img-gold { background: linear-gradient(135deg, #d4af37 0%, #f9e29c 50%, #b38b1d 100%); } /* Comme ta carte Gold */
-    .img-black { background: linear-gradient(135deg, #000 0%, #222 100%); } /* Comme ta carte Black Edition */
-    .img-blue { background: linear-gradient(135deg, #004a99 0%, #002d5a 100%); }
-    
-    .chip-gold { 
-      position: absolute; top: 40px; left: 25px; 
-      width: 40px; height: 30px; background: rgba(255,255,255,0.2); 
-      border-radius: 5px; border: 1px solid rgba(255,255,255,0.3);
+    .image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Pour que l'image remplisse bien le cadre */
     }
 
-    .product-info h3 { font-size: 1.2rem; margin-bottom: 8px; }
-    .product-info p { font-size: 0.85rem; color: var(--text-dim); line-height: 1.4; height: 40px; overflow: hidden; }
-    .price { font-size: 1.4rem; font-weight: 800; color: var(--primary); margin: 15px 0; }
+    .product-details { padding: 25px; }
+    .product-details h3 { font-size: 1.2rem; margin-bottom: 10px; }
+    .price { font-size: 1.5rem; font-weight: 800; color: var(--primary); margin: 15px 0; }
 
     .btn-buy {
       width: 100%;
       background: var(--primary);
-      color: #000;
+      color: white;
       border: none;
-      padding: 14px;
+      padding: 15px;
       border-radius: 12px;
-      font-weight: 800;
+      font-weight: 700;
       cursor: pointer;
-      transition: 0.3s;
+      font-size: 1rem;
     }
-    .btn-buy:hover { opacity: 0.9; transform: scale(1.02); }
 
-    /* --- FOOTER AVEC LIENS RÉELS --- */
+    /* --- PIED DE PAGE --- */
     footer { 
-      background: #08090b; 
-      padding: 5rem 8% 2rem; 
-      margin-top: 5rem; 
+      background: #07080a; 
+      padding: 4rem 8% 2rem; 
+      margin-top: 6rem; 
       border-top: 1px solid rgba(255,255,255,0.05);
     }
-    .footer-content { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; }
-    .footer-col h4 { margin-bottom: 20px; color: var(--primary); font-size: 0.9rem; text-transform: uppercase; }
+    .footer-flex { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; }
     
-    .social-links { display: flex; gap: 15px; }
-    .social-btn {
-      padding: 10px 20px;
+    .social-links { display: flex; gap: 15px; margin-top: 20px; }
+    .btn-social {
+      padding: 12px 25px;
       border-radius: 10px;
       text-decoration: none;
       font-weight: 700;
-      font-size: 0.85rem;
       transition: 0.3s;
     }
-    .wa { background: #25D366; color: white; }
-    .fb { background: #1877F2; color: white; }
+    .whatsapp { background: #25D366; color: white; }
+    .facebook { background: #1877F2; color: white; }
 
-    /* MODAL */
-    .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.9); display: none; align-items: center; justify-content: center; z-index: 2000; }
-    .modal-content { background: #1a1d23; padding: 3rem; border-radius: 30px; width: 90%; max-width: 450px; border: 1px solid var(--primary); }
-    .modal-content input { width: 100%; padding: 15px; margin-bottom: 15px; background: #000; border: 1px solid #333; color: white; border-radius: 12px; }
-
+    .footer-bottom { 
+      margin-top: 4rem; 
+      padding-top: 2rem; 
+      border-top: 1px solid rgba(255,255,255,0.05);
+      text-align: center;
+      font-size: 0.8rem;
+      color: #555;
+    }
   </style>
 </head>
 <body>
 
 <header>
-  <a href="#" class="logo">DUNDLE<span>.PRO</span></a>
-  <div style="font-weight: 600;">PANIER (0)</div>
+  <a href="#" class="logo">DUNDLE<span>PRO</span></a>
+  <div style="font-weight: 600;">🛒 PANIER (0)</div>
 </header>
 
-<main class="showcase">
-  <h1>Choisissez Votre Carte</h1>
-  <p>Services bancaires premium avec livraison instantanée.</p>
+<section class="catalog-section">
+  <div class="catalog-header">
+    <h1>Catalogue Premium</h1>
+    <p style="color:#64748b">Images réelles de nos produits disponibles.</p>
+  </div>
 
   <div class="product-grid">
     <div class="product-card">
-      <div class="card-image img-gold">
-        <div class="chip-gold"></div>
-        <div style="position:absolute; bottom:20px; left:25px; font-weight:800; color:rgba(0,0,0,0.6)">AURUM GOLD 24K</div>
+      <div class="image-container">
+        <img src="🆘.jpeg" alt="Carte Gold">
       </div>
-      <div class="product-info">
-        <h3>Aurum Gold Edition</h3>
-        <p>Le prestige absolu. Carte plaquée or avec services VIP inclus.</p>
+      <div class="product-details">
+        <h3>Aurum Gold Mastercard</h3>
+        <p style="color:#94a3b8; font-size:0.9rem;">La carte de luxe par excellence avec services conciergerie.</p>
         <div class="price">95 000 FCFA</div>
-        <button class="btn-buy" onclick="openModal('Aurum Gold')">COMMANDER</button>
+        <button class="btn-buy">COMMANDER</button>
       </div>
     </div>
 
     <div class="product-card">
-      <div class="card-image img-black">
-        <div class="chip-gold"></div>
-        <div style="position:absolute; bottom:20px; left:25px; font-weight:800; color:#fff; letter-spacing:2px">BLACK EDITION</div>
+      <div class="image-container">
+        <img src="Оформи новый банковский продукт.jpeg" alt="Carte Black">
       </div>
-      <div class="product-info">
-        <h3>Revolut Metal Black</h3>
-        <p>L'excellence technologique. Change de devises gratuit et cashback.</p>
+      <div class="product-details">
+        <h3>Black Edition Exclusive</h3>
+        <p style="color:#94a3b8; font-size:0.9rem;">Design minimaliste, plafonds élevés et sécurité maximale.</p>
         <div class="price">45 000 FCFA</div>
-        <button class="btn-buy" onclick="openModal('Revolut Metal')">COMMANDER</button>
+        <button class="btn-buy">COMMANDER</button>
       </div>
     </div>
 
     <div class="product-card">
-      <div class="card-image img-blue">
-        <div class="chip-gold"></div>
-        <div style="position:absolute; bottom:20px; left:25px; font-weight:800; color:#fff">PCS CHROME</div>
+      <div class="image-container">
+        <img src="cosmas business .jpeg" alt="Storicard">
       </div>
-      <div class="product-info">
-        <h3>Mastercard PCS</h3>
-        <p>La carte prépayée n°1. Sans compte bancaire et sans engagement.</p>
+      <div class="product-details">
+        <h3>Storicard Mastercard</h3>
+        <p style="color:#94a3b8; font-size:0.9rem;">Idéal pour les paiements internationaux et la gestion en ligne.</p>
         <div class="price">19 500 FCFA</div>
-        <button class="btn-buy" onclick="openModal('PCS Chrome')">COMMANDER</button>
+        <button class="btn-buy">COMMANDER</button>
       </div>
     </div>
   </div>
-</main>
+</section>
 
 <footer>
-  <div class="footer-content">
-    <div class="footer-col">
-      <h4>Navigation</h4>
-      <p style="color:var(--text-dim); font-size:0.9rem;">Cartes de paiement<br>Cartes cadeaux<br>Service client</p>
+  <div class="footer-flex">
+    <div>
+      <h4 style="margin-bottom:15px; color:var(--primary)">A PROPOS</h4>
+      <p style="color:#555; max-width:300px; font-size:0.9rem;">Votre partenaire de confiance pour l'achat de cartes prépayées et services bancaires premium.</p>
     </div>
-    <div class="footer-col">
-      <h4>Nous contacter</h4>
+    <div>
+      <h4 style="margin-bottom:15px; color:var(--primary)">NOUS CONTACTER</h4>
       <div class="social-links">
-        <a href="https://wa.me/22900000000" class="social-btn wa">WhatsApp</a>
-        <a href="https://facebook.com/tonprofil" class="social-btn fb">Facebook</a>
+        <a href="https://wa.me/TON_NUMERO" class="btn-social whatsapp">WhatsApp</a>
+        <a href="https://facebook.com/TON_PROFIL" class="btn-social facebook">Facebook</a>
       </div>
     </div>
   </div>
-  <div style="margin-top:3rem; color:#444; font-size:0.75rem; display:flex; justify-content:space-between;">
-    <p>© 2026 DUNDLE.PRO — TOUS DROITS RÉSERVÉS</p>
-    <p>ORANGE | WAVE | MOOV | VISA</p>
+  <div class="footer-bottom">
+    <p>© 2026 DUNDLE PRO — VISA | MASTERCARD | WAVE | ORANGE MONEY</p>
   </div>
 </footer>
-
-<div class="modal" id="orderModal">
-  <div class="modal-content">
-    <h2 id="mTitle" style="color: var(--primary); margin-bottom:20px;">Produit</h2>
-    <form onsubmit="event.preventDefault(); alert('Commande reçue !'); closeModal();">
-      <input type="text" placeholder="Nom complet" required>
-      <input type="tel" placeholder="Numéro WhatsApp" required>
-      <button type="submit" class="btn-buy">VALIDER L'ACHAT</button>
-    </form>
-    <button onclick="closeModal()" style="background:none; border:none; color:#555; margin-top:20px; cursor:pointer; width:100%;">ANNULER</button>
-  </div>
-</div>
-
-<script>
-  function openModal(t) {
-    document.getElementById('mTitle').innerText = t;
-    document.getElementById('orderModal').style.display = 'flex';
-  }
-  function closeModal() { document.getElementById('orderModal').style.display = 'none'; }
-</script>
 
 </body>
 </html>
