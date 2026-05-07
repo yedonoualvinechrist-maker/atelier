@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Alvine — Recharges & Cartes de paiement</title>
+  <title>DUNDLE DARK — Boutique Interactive</title>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
     :root {
       --primary: #f26522;
-      --bg-deep: #0f1115; /* Fond principal sombre */
-      --bg-card: #1a1d23; /* Fond des fiches */
+      --bg-deep: #0f1115;
+      --bg-card: #1a1d23;
       --text-white: #ffffff;
       --text-gray: #94a3b8;
       --border: rgba(255, 255, 255, 0.08);
@@ -17,107 +17,53 @@
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { 
-      font-family: 'Plus Jakarta Sans', sans-serif; 
-      background-color: var(--bg-deep); 
-      color: var(--text-white);
-      line-height: 1.6;
-    }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg-deep); color: var(--text-white); line-height: 1.6; }
 
-    /* --- NAVIGATION DARK --- */
-    header { 
-      background: rgba(15, 17, 21, 0.95); 
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border); 
-      position: sticky; top: 0; z-index: 1000; 
-    }
+    /* --- NAVIGATION --- */
+    header { background: rgba(15, 17, 21, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; }
     .nav-top { display: flex; justify-content: space-between; align-items: center; padding: 1rem 8%; }
     .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary); text-decoration: none; }
-    .nav-icons { display: flex; gap: 20px; font-size: 0.9rem; }
+    .cart-status { background: var(--bg-card); padding: 8px 20px; border-radius: 50px; border: 1px solid var(--border); cursor: pointer; transition: 0.3s; font-weight: 600; }
+    .cart-status:hover { border-color: var(--primary); box-shadow: 0 0 15px var(--glow); }
+
+    /* --- HERO & FILTRES --- */
+    .hero { padding: 4rem 8% 1rem; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; background: linear-gradient(to right, #fff, #888); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     
-    .main-nav { padding: 0.5rem 8%; display: flex; gap: 25px; }
-    .main-nav a { text-decoration: none; color: var(--text-gray); font-size: 0.85rem; font-weight: 600; transition: 0.3s; }
-    .main-nav a:hover { color: var(--text-white); }
-
-    /* --- SECTION HERO --- */
-    .hero { padding: 4rem 8% 2rem; max-width: 1200px; }
-    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; background: linear-gradient(to right, #fff, #666); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .hero p { color: var(--text-gray); max-width: 800px; margin-bottom: 2rem; }
-
-    /* --- FILTRES STYLISÉS --- */
-    .filter-bar { display: flex; gap: 12px; margin-bottom: 3rem; overflow-x: auto; padding-bottom: 10px; }
+    .filter-bar { display: flex; gap: 12px; padding: 1rem 8% 3rem; overflow-x: auto; }
     .filter-item { 
       background: var(--bg-card); padding: 12px 24px; border-radius: 12px; border: 1px solid var(--border);
       cursor: pointer; white-space: nowrap; font-size: 0.85rem; font-weight: 600; transition: 0.3s;
     }
-    .filter-item:hover { border-color: var(--primary); background: rgba(242, 101, 34, 0.05); color: var(--primary); }
+    .filter-item.active, .filter-item:hover { border-color: var(--primary); color: var(--primary); background: rgba(242, 101, 34, 0.05); }
 
-    /* --- GRILLE DE CARTES --- */
-    .products-grid { 
-      display: grid; 
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-      gap: 25px; padding: 0 8% 5rem; 
-    }
+    /* --- GRILLE DE PRODUITS --- */
+    .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; padding: 0 8% 5rem; }
     
-    .card { 
-      background: var(--bg-card); 
-      border-radius: 20px; 
-      overflow: hidden; 
-      border: 1px solid var(--border);
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-    }
-    .card:hover { 
-      transform: translateY(-10px); 
-      border-color: var(--primary);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 20px var(--glow);
-    }
+    .card { background: var(--bg-card); border-radius: 20px; overflow: hidden; border: 1px solid var(--border); transition: 0.4s; position: relative; }
+    .card:hover { transform: translateY(-10px); border-color: var(--primary); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
     
-    /* Bannières colorées avec effet de verre */
-    .card-banner { height: 160px; display: flex; align-items: center; justify-content: center; position: relative; }
+    .card-banner { height: 160px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+    .card-banner b { z-index: 2; transform: rotate(-5deg); font-size: 1.5rem; text-shadow: 0 5px 15px rgba(0,0,0,0.3); }
     .card-banner::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, var(--bg-card), transparent); }
-    
-    .bg-cashlib { background: linear-gradient(45deg, #fca311, #ffcdb2); }
-    .bg-transcash { background: linear-gradient(45deg, #d90429, #ef233c); }
-    .bg-paysafe { background: linear-gradient(45deg, #004e92, #00b4d8); }
-    .bg-flexepin { background: linear-gradient(45deg, #2b2d42, #8d99ae); }
-
-    .card-banner div { 
-      z-index: 2; transform: rotate(-5deg);
-      padding: 15px 35px; border-radius: 12px; font-weight: 800; 
-      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-    }
 
     .card-body { padding: 20px; }
-    .card-title { font-weight: 700; font-size: 1.1rem; margin-bottom: 8px; }
-    .rating { color: #ffb400; font-size: 0.8rem; margin-bottom: 12px; }
-    .card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 15px; }
-    .price { font-weight: 800; font-size: 1.2rem; color: var(--primary); }
+    .price { font-weight: 800; font-size: 1.3rem; color: var(--primary); margin: 10px 0; }
     
-    .btn-action { 
-      background: var(--primary); color: white; border: none; 
-      padding: 8px 16px; border-radius: 8px; font-weight: 700; cursor: pointer;
+    .btn-buy { 
+      width: 100%; background: var(--primary); color: white; border: none; 
+      padding: 12px; border-radius: 12px; font-weight: 700; cursor: pointer; transition: 0.2s;
     }
+    .btn-buy:hover { background: #ff7a3d; transform: scale(1.02); }
+    .btn-buy:active { transform: scale(0.98); }
 
-    /* --- FOOTER SOMBRE --- */
-    footer { background: #08090b; border-top: 1px solid var(--border); padding: 5rem 8% 2rem; }
-    .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 50px; margin-bottom: 4rem; }
-    .footer-col h4 { margin-bottom: 1.5rem; font-size: 1rem; color: var(--text-white); }
-    .footer-col ul { list-style: none; }
-    .footer-col ul li { margin-bottom: 12px; font-size: 0.85rem; color: var(--text-gray); transition: 0.2s; cursor: pointer; }
-    .footer-col ul li:hover { color: var(--primary); padding-left: 5px; }
+    /* --- MODAL DE COMMANDE --- */
+    .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.95); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 20px; }
+    .modal-content { background: var(--bg-card); padding: 2.5rem; border-radius: 24px; width: 100%; max-width: 400px; border: 1px solid var(--primary); text-align: center; }
+    .modal-content input { width: 100%; padding: 12px; margin-bottom: 12px; background: #000; border: 1px solid var(--border); color: white; border-radius: 10px; outline: none; }
+    .modal-content input:focus { border-color: var(--primary); }
 
-    .footer-bottom { 
-      border-top: 1px solid var(--border); pt: 2rem; 
-      display: flex; justify-content: space-between; align-items: center; 
-      font-size: 0.75rem; color: #555; 
-    }
-
-    /* Scrollbar stylisée */
-    ::-webkit-scrollbar { width: 8px; }
-    ::-webkit-scrollbar-track { background: var(--bg-deep); }
-    ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
-    ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
-
+    footer { background: #08090b; border-top: 1px solid var(--border); padding: 4rem 8% 2rem; text-align: center; }
   </style>
 </head>
 <body>
@@ -125,127 +71,109 @@
 <header>
   <div class="nav-top">
     <a href="#" class="logo">dundle.dark</a>
-    <div class="nav-icons">
-       <span>🌐 FR | EUR</span>
-       <span style="cursor:pointer">🛒 Panier (0)</span>
-    </div>
+    <div class="cart-status" id="cartBtn">🛒 Panier (<span id="cartCount">0</span>)</div>
   </div>
-  <nav class="main-nav">
-    <a href="#">Cartes de paiement</a>
-    <a href="#">Cartes cadeaux</a>
-    <a href="#">Jeux</a>
-    <a href="#">Support</a>
-  </nav>
 </header>
 
 <main class="hero">
-  <h1>Libérez votre façon de payer.</h1>
-  <p>Obtenez vos codes de paiement instantanément. Sécurisé, anonyme et disponible 24h/24. Rejoignez plus de 100 000 utilisateurs satisfaits.</p>
-
-  <div class="filter-bar">
-    <div class="filter-item">💳 Recharges</div>
-    <div class="filter-item">🎮 Gaming</div>
-    <div class="filter-item">🔐 Anonymat</div>
-    <div class="filter-item">🌍 International</div>
-  </div>
+  <h1>Acheter une carte prépayée</h1>
+  <p style="color: var(--text-gray);">Choisissez votre recharge et recevez votre code instantanément.</p>
 </main>
+
+<div class="filter-bar" id="filters">
+  <div class="filter-item active" onclick="setActiveFilter(this)">Tout voir</div>
+  <div class="filter-item" onclick="setActiveFilter(this)">Paiement</div>
+  <div class="filter-item" onclick="setActiveFilter(this)">Gaming</div>
+  <div class="filter-item" onclick="setActiveFilter(this)">Crypto</div>
+</div>
 
 <div class="products-grid">
   <div class="card">
-    <div class="card-banner bg-cashlib">
-      <div style="background: #003049; color: white;">CASHlib</div>
+    <div class="card-banner" style="background: linear-gradient(45deg, #fca311, #ffcdb2);">
+      <b style="color: #003049;">CASHlib</b>
     </div>
     <div class="card-body">
-      <div class="card-title">Recharge CASHlib</div>
-      <div class="rating">★★★★★ <span style="color:var(--text-gray)">(1.2k)</span></div>
-      <p style="font-size: 0.8rem; color: var(--text-gray);">Utilisable sur des milliers de sites de jeux.</p>
-      <div class="card-footer">
-        <div class="price">19 500 F</div>
-        <button class="btn-action">Acheter</button>
-      </div>
+      <h3>Recharge CASHlib</h3>
+      <div class="price">19 500 F</div>
+      <button class="btn-buy" onclick="openOrder('CASHlib', '19 500')">ACHETER</button>
     </div>
   </div>
 
   <div class="card">
-    <div class="card-banner bg-transcash">
-      <div style="background: #000; color: white; border: 1px solid #ff0000;">transcash</div>
+    <div class="card-banner" style="background: linear-gradient(45deg, #004e92, #00b4d8);">
+      <b style="color: #fff;">paysafecard</b>
     </div>
     <div class="card-body">
-      <div class="card-title">Pack Transcash</div>
-      <div class="rating">★★★★☆ <span style="color:var(--text-gray)">(850)</span></div>
-      <p style="font-size: 0.8rem; color: var(--text-gray);">La liberté d'une carte bancaire sans banque.</p>
-      <div class="card-footer">
-        <div class="price">22 000 F</div>
-        <button class="btn-action">Acheter</button>
-      </div>
+      <h3>PaysafeCard Classic</h3>
+      <div class="price">15 000 F</div>
+      <button class="btn-buy" onclick="openOrder('PaysafeCard', '15 000')">ACHETER</button>
     </div>
   </div>
 
   <div class="card">
-    <div class="card-banner bg-paysafe">
-      <div style="background: #ffffff; color: #004e92;">paysafecard</div>
+    <div class="card-banner" style="background: linear-gradient(45deg, #d90429, #ef233c);">
+      <b style="color: #000; border: 1px solid #fff; padding: 5px 10px;">transcash</b>
     </div>
     <div class="card-body">
-      <div class="card-title">PaysafeCard Classic</div>
-      <div class="rating">★★★★★ <span style="color:var(--text-gray)">(3.4k)</span></div>
-      <p style="font-size: 0.8rem; color: var(--text-gray);">La référence mondiale du paiement prépayé.</p>
-      <div class="card-footer">
-        <div class="price">15 000 F</div>
-        <button class="btn-action">Acheter</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-banner bg-flexepin">
-      <div style="background: #ef233c; color: white;">flexepin</div>
-    </div>
-    <div class="card-body">
-      <div class="card-title">Recharge Flexepin</div>
-      <div class="rating">★★★★★ <span style="color:var(--text-gray)">(412)</span></div>
-      <p style="font-size: 0.8rem; color: var(--text-gray);">Payez en ligne aussi simplement qu'en espèces.</p>
-      <div class="card-footer">
-        <div class="price">30 000 F</div>
-        <button class="btn-action">Acheter</button>
-      </div>
+      <h3>Pack Transcash</h3>
+      <div class="price">22 000 F</div>
+      <button class="btn-buy" onclick="openOrder('Transcash', '22 000')">ACHETER</button>
     </div>
   </div>
 </div>
 
+<div class="modal" id="orderModal">
+  <div class="modal-content">
+    <h2 id="modalTitle" style="color: var(--primary); margin-bottom: 5px;">Produit</h2>
+    <p id="modalPrice" style="color: var(--text-gray); margin-bottom: 20px; font-weight: bold;"></p>
+    <form onsubmit="handlePayment(event)">
+      <input type="text" placeholder="Nom complet" required>
+      <input type="email" placeholder="Email de réception" required>
+      <input type="tel" placeholder="Numéro WhatsApp" required>
+      <button type="submit" class="btn-buy">CONFIRMER L'ACHAT</button>
+    </form>
+    <button onclick="closeOrder()" style="background:none; border:none; color:var(--text-gray); margin-top:15px; cursor:pointer;">Annuler</button>
+  </div>
+</div>
+
 <footer>
-  <div class="footer-grid">
-    <div class="footer-col">
-      <h4>Navigation</h4>
-      <ul>
-        <li>Cartes de paiement</li>
-        <li>Cartes cadeaux</li>
-        <li>Recharges mobiles</li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Aide</h4>
-      <ul>
-        <li>Centre de support</li>
-        <li>Vérifier mon code</li>
-        <li>Contactez-nous</li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Légal</h4>
-      <ul>
-        <li>Conditions d'utilisation</li>
-        <li>Politique de cookies</li>
-        <li>Mentions légales</li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>© 2026 Dundle Dark - All rights reserved.</p>
-    <div style="display:flex; gap:15px;">
-      <span>VISA</span> | <span>MASTERCARD</span> | <span>OM</span> | <span>WAVE</span>
-    </div>
-  </div>
+  <p>© 2026 Dundle Dark — Visa | MasterCard | Orange | Wave</p>
 </footer>
+
+<script>
+  let cart = 0;
+
+  // Gestion des filtres
+  function setActiveFilter(element) {
+    document.querySelectorAll('.filter-item').forEach(f => f.classList.remove('active'));
+    element.classList.add('active');
+  }
+
+  // Gestion de la commande
+  function openOrder(name, price) {
+    document.getElementById('modalTitle').innerText = name;
+    document.getElementById('modalPrice').innerText = price + " FCFA";
+    document.getElementById('orderModal').style.display = 'flex';
+  }
+
+  function closeOrder() {
+    document.getElementById('orderModal').style.display = 'none';
+  }
+
+  function handlePayment(e) {
+    e.preventDefault();
+    cart++;
+    document.getElementById('cartCount').innerText = cart;
+    alert("Merci ! Votre commande pour " + document.getElementById('modalTitle').innerText + " est enregistrée. Redirection vers le paiement mobile...");
+    closeOrder();
+  }
+
+  // Fermer la modal en cliquant à côté
+  window.onclick = function(event) {
+    let modal = document.getElementById('orderModal');
+    if (event.target == modal) closeOrder();
+  }
+</script>
 
 </body>
 </html>
