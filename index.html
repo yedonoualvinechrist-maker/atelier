@@ -3,70 +3,120 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Acheter une carte prépayée — Recharge instantanée</title>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <title>DUNDLE DARK — Recharges & Cartes de paiement</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #f26522; /* Orange Dundle */
-      --bg-light: #f8fafb;
-      --text-dark: #1a1a1a;
-      --text-gray: #5e6d77;
-      --white: #ffffff;
+      --primary: #f26522;
+      --bg-deep: #0f1115; /* Fond principal sombre */
+      --bg-card: #1a1d23; /* Fond des fiches */
+      --text-white: #ffffff;
+      --text-gray: #94a3b8;
+      --border: rgba(255, 255, 255, 0.08);
+      --glow: rgba(242, 101, 34, 0.15);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Open Sans', sans-serif; background-color: var(--bg-light); color: var(--text-dark); }
-
-    /* --- HEADER & NAV --- */
-    header { background: var(--white); border-bottom: 1px solid #e1e8ed; position: sticky; top: 0; z-index: 1000; }
-    .nav-top { display: flex; justify-content: space-between; align-items: center; padding: 1rem 8%; }
-    .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary); text-decoration: none; display: flex; align-items: center; gap: 8px; }
-    .nav-icons { display: flex; gap: 20px; align-items: center; }
-    
-    .main-nav { background: var(--white); padding: 0.5rem 8%; display: flex; gap: 25px; border-bottom: 1px solid #eee; }
-    .main-nav a { text-decoration: none; color: var(--text-dark); font-size: 0.9rem; font-weight: 600; }
-
-    /* --- HERO SECTION --- */
-    .hero { padding: 3rem 8%; max-width: 1200px; }
-    .hero h1 { font-size: 2rem; margin-bottom: 1rem; color: #333; }
-    .hero p { color: var(--text-gray); line-height: 1.6; font-size: 0.95rem; margin-bottom: 2rem; }
-
-    /* --- FILTRES (TABS) --- */
-    .filter-bar { display: flex; gap: 12px; margin-bottom: 2rem; overflow-x: auto; padding-bottom: 10px; }
-    .filter-item { 
-      background: var(--white); padding: 12px 20px; border-radius: 8px; border: 1px solid #ddd;
-      display: flex; align-items: center; gap: 10px; cursor: pointer; white-space: nowrap;
-      font-size: 0.85rem; font-weight: 600; transition: 0.2s;
+    body { 
+      font-family: 'Plus Jakarta Sans', sans-serif; 
+      background-color: var(--bg-deep); 
+      color: var(--text-white);
+      line-height: 1.6;
     }
-    .filter-item:hover { border-color: var(--primary); color: var(--primary); }
 
-    /* --- GRID PRODUITS --- */
-    .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; padding: 0 8% 4rem; }
+    /* --- NAVIGATION DARK --- */
+    header { 
+      background: rgba(15, 17, 21, 0.95); 
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border); 
+      position: sticky; top: 0; z-index: 1000; 
+    }
+    .nav-top { display: flex; justify-content: space-between; align-items: center; padding: 1rem 8%; }
+    .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary); text-decoration: none; }
+    .nav-icons { display: flex; gap: 20px; font-size: 0.9rem; }
     
-    .card { background: var(--white); border-radius: 12px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.05); transition: 0.3s; cursor: pointer; }
-    .card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
-    
-    .card-banner { height: 180px; display: flex; align-items: center; justify-content: center; position: relative; }
-    .card-banner img { width: 80%; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
-    
-    /* Couleurs de fond des bannières comme l'image */
-    .bg-cashlib { background-color: #fca311; }
-    .bg-transcash { background-color: #d90429; }
-    .bg-paysafe { background-color: #8ecae6; }
-    .bg-flexepin { background-color: #ef233c; }
+    .main-nav { padding: 0.5rem 8%; display: flex; gap: 25px; }
+    .main-nav a { text-decoration: none; color: var(--text-gray); font-size: 0.85rem; font-weight: 600; transition: 0.3s; }
+    .main-nav a:hover { color: var(--text-white); }
 
-    .card-body { padding: 15px; }
-    .card-title { font-weight: 700; font-size: 0.95rem; margin-bottom: 5px; }
-    .rating { color: #f39c12; font-size: 0.8rem; margin-bottom: 8px; }
-    .card-info { font-size: 0.75rem; color: var(--text-gray); display: flex; align-items: center; gap: 5px; }
+    /* --- SECTION HERO --- */
+    .hero { padding: 4rem 8% 2rem; max-width: 1200px; }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; background: linear-gradient(to right, #fff, #666); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero p { color: var(--text-gray); max-width: 800px; margin-bottom: 2rem; }
 
-    /* --- FOOTER --- */
-    footer { background: #ffffff; border-top: 1px solid #e1e8ed; padding: 4rem 8% 2rem; color: #333; }
-    .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 3rem; }
-    .footer-col h4 { margin-bottom: 1.5rem; font-size: 1rem; }
+    /* --- FILTRES STYLISÉS --- */
+    .filter-bar { display: flex; gap: 12px; margin-bottom: 3rem; overflow-x: auto; padding-bottom: 10px; }
+    .filter-item { 
+      background: var(--bg-card); padding: 12px 24px; border-radius: 12px; border: 1px solid var(--border);
+      cursor: pointer; white-space: nowrap; font-size: 0.85rem; font-weight: 600; transition: 0.3s;
+    }
+    .filter-item:hover { border-color: var(--primary); background: rgba(242, 101, 34, 0.05); color: var(--primary); }
+
+    /* --- GRILLE DE CARTES --- */
+    .products-grid { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+      gap: 25px; padding: 0 8% 5rem; 
+    }
+    
+    .card { 
+      background: var(--bg-card); 
+      border-radius: 20px; 
+      overflow: hidden; 
+      border: 1px solid var(--border);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+    }
+    .card:hover { 
+      transform: translateY(-10px); 
+      border-color: var(--primary);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 20px var(--glow);
+    }
+    
+    /* Bannières colorées avec effet de verre */
+    .card-banner { height: 160px; display: flex; align-items: center; justify-content: center; position: relative; }
+    .card-banner::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, var(--bg-card), transparent); }
+    
+    .bg-cashlib { background: linear-gradient(45deg, #fca311, #ffcdb2); }
+    .bg-transcash { background: linear-gradient(45deg, #d90429, #ef233c); }
+    .bg-paysafe { background: linear-gradient(45deg, #004e92, #00b4d8); }
+    .bg-flexepin { background: linear-gradient(45deg, #2b2d42, #8d99ae); }
+
+    .card-banner div { 
+      z-index: 2; transform: rotate(-5deg);
+      padding: 15px 35px; border-radius: 12px; font-weight: 800; 
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    }
+
+    .card-body { padding: 20px; }
+    .card-title { font-weight: 700; font-size: 1.1rem; margin-bottom: 8px; }
+    .rating { color: #ffb400; font-size: 0.8rem; margin-bottom: 12px; }
+    .card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 15px; }
+    .price { font-weight: 800; font-size: 1.2rem; color: var(--primary); }
+    
+    .btn-action { 
+      background: var(--primary); color: white; border: none; 
+      padding: 8px 16px; border-radius: 8px; font-weight: 700; cursor: pointer;
+    }
+
+    /* --- FOOTER SOMBRE --- */
+    footer { background: #08090b; border-top: 1px solid var(--border); padding: 5rem 8% 2rem; }
+    .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 50px; margin-bottom: 4rem; }
+    .footer-col h4 { margin-bottom: 1.5rem; font-size: 1rem; color: var(--text-white); }
     .footer-col ul { list-style: none; }
-    .footer-col ul li { margin-bottom: 10px; font-size: 0.85rem; color: var(--text-gray); cursor: pointer; }
-    .footer-bottom { border-top: 1px solid #eee; pt: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; font-size: 0.8rem; color: #999; }
+    .footer-col ul li { margin-bottom: 12px; font-size: 0.85rem; color: var(--text-gray); transition: 0.2s; cursor: pointer; }
+    .footer-col ul li:hover { color: var(--primary); padding-left: 5px; }
+
+    .footer-bottom { 
+      border-top: 1px solid var(--border); pt: 2rem; 
+      display: flex; justify-content: space-between; align-items: center; 
+      font-size: 0.75rem; color: #555; 
+    }
+
+    /* Scrollbar stylisée */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg-deep); }
+    ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
 
   </style>
 </head>
@@ -74,76 +124,90 @@
 
 <header>
   <div class="nav-top">
-    <a href="#" class="logo"><span>🟡</span> dundle</a>
+    <a href="#" class="logo">dundle.dark</a>
     <div class="nav-icons">
-       <span>🇫🇷 FR</span>
-       <span>👤</span>
-       <span>🛒</span>
+       <span>🌐 FR | EUR</span>
+       <span style="cursor:pointer">🛒 Panier (0)</span>
     </div>
   </div>
   <nav class="main-nav">
-    <a href="#">Cartes de paiement ▾</a>
-    <a href="#">Cartes cadeaux ▾</a>
-    <a href="#">Gamecards ▾</a>
-    <a href="#">Recharges mobiles ▾</a>
+    <a href="#">Cartes de paiement</a>
+    <a href="#">Cartes cadeaux</a>
+    <a href="#">Jeux</a>
+    <a href="#">Support</a>
   </nav>
 </header>
 
 <main class="hero">
-  <p style="font-size: 0.8rem; margin-bottom: 1rem;">🏠 > Cartes de paiement</p>
-  <h1>Acheter une carte prépayée pour payer en ligne</h1>
-  <p>Payez, jouez et restez connecté(e) dans le monde entier grâce aux cartes bancaires prépayées. Parcourez notre vaste collection de cartes anonymes, sécurisées et sans vérification de solvabilité.</p>
+  <h1>Libérez votre façon de payer.</h1>
+  <p>Obtenez vos codes de paiement instantanément. Sécurisé, anonyme et disponible 24h/24. Rejoignez plus de 100 000 utilisateurs satisfaits.</p>
 
   <div class="filter-bar">
-    <div class="filter-item">📺 Codes paiement prépayé</div>
-    <div class="filter-item">💳 Recharges carte prépayée</div>
-    <div class="filter-item">₿ Cartes crypto</div>
-    <div class="filter-item">₿ Azteco</div>
+    <div class="filter-item">💳 Recharges</div>
+    <div class="filter-item">🎮 Gaming</div>
+    <div class="filter-item">🔐 Anonymat</div>
+    <div class="filter-item">🌍 International</div>
   </div>
 </main>
 
 <div class="products-grid">
   <div class="card">
     <div class="card-banner bg-cashlib">
-      <div style="background: #003049; color: white; padding: 15px 30px; border-radius: 8px; font-weight: 800;">CASHlib</div>
+      <div style="background: #003049; color: white;">CASHlib</div>
     </div>
     <div class="card-body">
       <div class="card-title">Recharge CASHlib</div>
-      <div class="rating">★★★★★ (169)</div>
-      <div class="card-info">🌐 Utilisable mondialement</div>
+      <div class="rating">★★★★★ <span style="color:var(--text-gray)">(1.2k)</span></div>
+      <p style="font-size: 0.8rem; color: var(--text-gray);">Utilisable sur des milliers de sites de jeux.</p>
+      <div class="card-footer">
+        <div class="price">19 500 F</div>
+        <button class="btn-action">Acheter</button>
+      </div>
     </div>
   </div>
 
   <div class="card">
     <div class="card-banner bg-transcash">
-      <div style="background: #000; color: white; padding: 15px 30px; border-radius: 8px; font-weight: 800; border: 1px solid red;">transcash</div>
+      <div style="background: #000; color: white; border: 1px solid #ff0000;">transcash</div>
     </div>
     <div class="card-body">
-      <div class="card-title">Recharge Transcash</div>
-      <div class="rating">★★★★☆ (32)</div>
-      <div class="card-info">🌐 Utilisable mondialement</div>
+      <div class="card-title">Pack Transcash</div>
+      <div class="rating">★★★★☆ <span style="color:var(--text-gray)">(850)</span></div>
+      <p style="font-size: 0.8rem; color: var(--text-gray);">La liberté d'une carte bancaire sans banque.</p>
+      <div class="card-footer">
+        <div class="price">22 000 F</div>
+        <button class="btn-action">Acheter</button>
+      </div>
     </div>
   </div>
 
   <div class="card">
     <div class="card-banner bg-paysafe">
-      <div style="background: #004e92; color: white; padding: 15px 30px; border-radius: 8px; font-weight: 800;">paysafecard</div>
+      <div style="background: #ffffff; color: #004e92;">paysafecard</div>
     </div>
     <div class="card-body">
       <div class="card-title">PaysafeCard Classic</div>
-      <div class="rating">★★★★★ (619)</div>
-      <div class="card-info">🇫🇷 France</div>
+      <div class="rating">★★★★★ <span style="color:var(--text-gray)">(3.4k)</span></div>
+      <p style="font-size: 0.8rem; color: var(--text-gray);">La référence mondiale du paiement prépayé.</p>
+      <div class="card-footer">
+        <div class="price">15 000 F</div>
+        <button class="btn-action">Acheter</button>
+      </div>
     </div>
   </div>
 
   <div class="card">
     <div class="card-banner bg-flexepin">
-      <div style="background: #fff; color: #333; padding: 15px 30px; border-radius: 8px; font-weight: 800;">flexepin</div>
+      <div style="background: #ef233c; color: white;">flexepin</div>
     </div>
     <div class="card-body">
       <div class="card-title">Recharge Flexepin</div>
-      <div class="rating">★★★★★ (61)</div>
-      <div class="card-info">🌐 Utilisable mondialement</div>
+      <div class="rating">★★★★★ <span style="color:var(--text-gray)">(412)</span></div>
+      <p style="font-size: 0.8rem; color: var(--text-gray);">Payez en ligne aussi simplement qu'en espèces.</p>
+      <div class="card-footer">
+        <div class="price">30 000 F</div>
+        <button class="btn-action">Acheter</button>
+      </div>
     </div>
   </div>
 </div>
@@ -151,33 +215,35 @@
 <footer>
   <div class="footer-grid">
     <div class="footer-col">
-      <h4>Produits</h4>
+      <h4>Navigation</h4>
       <ul>
         <li>Cartes de paiement</li>
         <li>Cartes cadeaux</li>
-        <li>Jeux vidéo</li>
+        <li>Recharges mobiles</li>
       </ul>
     </div>
     <div class="footer-col">
-      <h4>Aide & Support</h4>
+      <h4>Aide</h4>
       <ul>
-        <li>Service client</li>
-        <li>Comment ça marche</li>
+        <li>Centre de support</li>
         <li>Vérifier mon code</li>
+        <li>Contactez-nous</li>
       </ul>
     </div>
     <div class="footer-col">
-      <h4>À propos</h4>
+      <h4>Légal</h4>
       <ul>
-        <li>Qui sommes-nous</li>
-        <li>Blog</li>
-        <li>Confidentialité</li>
+        <li>Conditions d'utilisation</li>
+        <li>Politique de cookies</li>
+        <li>Mentions légales</li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2026 Dundle - Tous droits réservés.</p>
-    <p>Paiement sécurisé via SSL</p>
+    <p>© 2026 Dundle Dark - All rights reserved.</p>
+    <div style="display:flex; gap:15px;">
+      <span>VISA</span> | <span>MASTERCARD</span> | <span>OM</span> | <span>WAVE</span>
+    </div>
   </div>
 </footer>
 
