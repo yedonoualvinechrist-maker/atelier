@@ -3,95 +3,117 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DUNDLE LUXE — Service Officiel</title>
+  <title>DUNDLE LUXE — Sélection Officielle</title>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #f26522;
-      --bg: #050608;
-      --card-bg: #111318;
+      --primary: #d4af37; /* Or pour le côté Premium */
+      --bg: #0d0f12;
+      --card-inner: #1a1d23;
       --text: #ffffff;
-      --text-dim: #64748b;
-      --glass: rgba(255, 255, 255, 0.03);
+      --text-dim: #94a3b8;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg); color: var(--text); overflow-x: hidden; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg); color: var(--text); }
 
-    /* --- NAVIGATION --- */
-    header { 
-      padding: 1.5rem 8%; display: flex; justify-content: space-between; align-items: center;
-      background: rgba(5, 6, 8, 0.8); backdrop-filter: blur(20px); position: sticky; top: 0; z-index: 1000;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
+    header { padding: 1.5rem 8%; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-size: 1.5rem; font-weight: 800; color: #fff; text-decoration: none; }
+    .logo span { color: var(--primary); }
+
+    /* --- SECTION VITRINE (STATIQUE ET ÉLÉGANTE) --- */
+    .showcase { padding: 4rem 8%; text-align: center; }
+    .showcase h1 { font-size: 2.5rem; margin-bottom: 1rem; font-weight: 800; }
+    .showcase p { color: var(--text-dim); margin-bottom: 4rem; }
+
+    /* Grille de présentation type "Vêtements de Luxe" */
+    .product-grid { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+      gap: 30px; 
     }
-    .logo { font-size: 1.4rem; font-weight: 800; color: var(--primary); text-decoration: none; }
 
-    /* --- CARROUSEL ÉLÉGANT (AUTO-SCROLL) --- */
-    .hero-slider { padding: 4rem 0; background: radial-gradient(circle at center, #1a1c23 0%, var(--bg) 100%); overflow: hidden; }
-    .slider-track { display: flex; width: calc(300px * 12); animation: scroll 40s linear infinite; gap: 50px; }
+    .product-card {
+      background: var(--card-inner);
+      border-radius: 24px;
+      padding: 20px;
+      border: 1px solid rgba(255,255,255,0.03);
+      transition: all 0.4s ease;
+      text-align: left;
+    }
+    .product-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--primary);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+
+    /* Remplacement des blocs par des simulations d'images réelles */
+    .card-image {
+      width: 100%;
+      height: 180px;
+      border-radius: 15px;
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+    }
     
-    @keyframes scroll {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(calc(-300px * 6)); }
-    }
-
-    /* --- DESIGN CARTE PREMIUM --- */
-    .real-card {
-      width: 280px; height: 170px; border-radius: 16px; position: relative;
-      padding: 20px; display: flex; flex-direction: column; justify-content: space-between;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1);
-      transition: 0.5s cubic-bezier(0.22, 1, 0.36, 1); flex-shrink: 0;
-    }
-    .real-card:hover { transform: scale(1.05) rotate(2deg); border-color: var(--primary); }
+    /* Styles pour imiter tes photos envoyées */
+    .img-gold { background: linear-gradient(135deg, #d4af37 0%, #f9e29c 50%, #b38b1d 100%); } /* Comme ta carte Gold */
+    .img-black { background: linear-gradient(135deg, #000 0%, #222 100%); } /* Comme ta carte Black Edition */
+    .img-blue { background: linear-gradient(135deg, #004a99 0%, #002d5a 100%); }
     
-    .card-chip { width: 40px; height: 30px; background: linear-gradient(135deg, #e2b04a, #96701d); border-radius: 6px; }
-    .card-brand { font-weight: 800; font-size: 1.1rem; text-align: right; font-style: italic; }
-    .card-number { font-family: monospace; letter-spacing: 2px; font-size: 0.9rem; margin-top: 20px; color: rgba(255,255,255,0.7); }
+    .chip-gold { 
+      position: absolute; top: 40px; left: 25px; 
+      width: 40px; height: 30px; background: rgba(255,255,255,0.2); 
+      border-radius: 5px; border: 1px solid rgba(255,255,255,0.3);
+    }
 
-    /* Couleurs Thématiques */
-    .pcs { background: linear-gradient(135deg, #004a99, #001a33); }
-    .nickel { background: linear-gradient(135deg, #ff5f00, #993a00); }
-    .revolut { background: linear-gradient(135deg, #000000, #333333); }
-    .netflix { background: linear-gradient(135deg, #e50914, #000000); }
-    .amazon { background: linear-gradient(135deg, #232f3e, #37475a); }
+    .product-info h3 { font-size: 1.2rem; margin-bottom: 8px; }
+    .product-info p { font-size: 0.85rem; color: var(--text-dim); line-height: 1.4; height: 40px; overflow: hidden; }
+    .price { font-size: 1.4rem; font-weight: 800; color: var(--primary); margin: 15px 0; }
 
-    /* --- SECTION CATALOGUE --- */
-    .container { padding: 4rem 8%; }
-    h2 { font-size: 2rem; font-weight: 800; margin-bottom: 3rem; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
+    .btn-buy {
+      width: 100%;
+      background: var(--primary);
+      color: #000;
+      border: none;
+      padding: 14px;
+      border-radius: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .btn-buy:hover { opacity: 0.9; transform: scale(1.02); }
+
+    /* --- FOOTER AVEC LIENS RÉELS --- */
+    footer { 
+      background: #08090b; 
+      padding: 5rem 8% 2rem; 
+      margin-top: 5rem; 
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .footer-content { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; }
+    .footer-col h4 { margin-bottom: 20px; color: var(--primary); font-size: 0.9rem; text-transform: uppercase; }
     
-    .item-box { 
-      background: var(--card-bg); border-radius: 24px; padding: 25px; 
-      border: 1px solid var(--glass); transition: 0.3s;
+    .social-links { display: flex; gap: 15px; }
+    .social-btn {
+      padding: 10px 20px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.85rem;
+      transition: 0.3s;
     }
-    .item-box:hover { background: #1a1d23; border-color: var(--primary); }
-    
-    .price-tag { font-size: 1.6rem; font-weight: 800; color: var(--primary); margin: 20px 0; }
-    .buy-btn { 
-      width: 100%; padding: 15px; border-radius: 12px; border: none; 
-      background: var(--primary); color: white; font-weight: 700; cursor: pointer; transition: 0.3s;
-    }
-    .buy-btn:hover { box-shadow: 0 10px 20px rgba(242, 101, 34, 0.3); transform: translateY(-2px); }
-
-    /* --- FOOTER ÉLÉGANT --- */
-    footer { border-top: 1px solid var(--glass); padding: 5rem 8% 2rem; margin-top: 4rem; }
-    .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 60px; }
-    .footer-col h4 { color: var(--primary); margin-bottom: 1.5rem; font-size: 0.9rem; letter-spacing: 1.5px; }
-    .footer-col ul { list-style: none; }
-    .footer-col li { color: var(--text-dim); margin-bottom: 12px; font-size: 0.9rem; cursor: pointer; transition: 0.2s; }
-    .footer-col li:hover { color: white; }
-
-    .social-row { display: flex; gap: 20px; margin-top: 20px; }
-    .social-icon { 
-      width: 45px; height: 45px; border-radius: 12px; background: var(--glass);
-      display: flex; align-items: center; justify-content: center; text-decoration: none;
-      color: white; border: 1px solid rgba(255,255,255,0.05); transition: 0.3s;
-    }
-    .social-icon:hover { background: var(--primary); border-color: var(--primary); transform: translateY(-3px); }
+    .wa { background: #25D366; color: white; }
+    .fb { background: #1877F2; color: white; }
 
     /* MODAL */
-    .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.95); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 20px; }
-    .modal-content { background: #16181d; padding: 3rem; border-radius: 30px; width: 100%; max-width: 450px; border: 1px solid var(--primary); }
+    .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.9); display: none; align-items: center; justify-content: center; z-index: 2000; }
+    .modal-content { background: #1a1d23; padding: 3rem; border-radius: 30px; width: 90%; max-width: 450px; border: 1px solid var(--primary); }
     .modal-content input { width: 100%; padding: 15px; margin-bottom: 15px; background: #000; border: 1px solid #333; color: white; border-radius: 12px; }
 
   </style>
@@ -99,96 +121,94 @@
 <body>
 
 <header>
-  <a href="#" class="logo">DUNDLE<span style="color:white">.PRO</span></a>
-  <div style="font-weight: 600; font-size: 0.9rem;">PANIER (<span id="cart">0</span>)</div>
+  <a href="#" class="logo">DUNDLE<span>.PRO</span></a>
+  <div style="font-weight: 600;">PANIER (0)</div>
 </header>
 
-<div class="hero-slider">
-  <div class="slider-track">
-    <div class="real-card pcs"><div class="card-chip"></div><div class="card-brand">PCS</div><div class="card-number">**** **** **** 2026</div></div>
-    <div class="real-card nickel"><div class="card-chip"></div><div class="card-brand">NICKEL</div><div class="card-number">**** **** **** 4452</div></div>
-    <div class="real-card revolut"><div class="card-chip"></div><div class="card-brand">REVOLUT</div><div class="card-number">**** **** **** 8890</div></div>
-    <div class="real-card netflix"><div class="card-chip"></div><div class="card-brand">NETFLIX</div><div class="card-number">PREMIUM PLAN</div></div>
-    <div class="real-card amazon"><div class="card-chip"></div><div class="card-brand">AMAZON</div><div class="card-number">GIFT CARD</div></div>
-    <div class="real-card pcs"><div class="card-chip"></div><div class="card-brand">PCS</div><div class="card-number">**** **** **** 2026</div></div>
-    <div class="real-card nickel"><div class="card-chip"></div><div class="card-brand">NICKEL</div><div class="card-number">**** **** **** 4452</div></div>
-    <div class="real-card revolut"><div class="card-chip"></div><div class="card-brand">REVOLUT</div><div class="card-number">**** **** **** 8890</div></div>
-  </div>
-</div>
+<main class="showcase">
+  <h1>Choisissez Votre Carte</h1>
+  <p>Services bancaires premium avec livraison instantanée.</p>
 
-<div class="container">
-  <h2>Toutes nos solutions</h2>
-  <div class="grid">
-    <div class="item-box">
-      <div class="real-card pcs" style="width:100%"><div class="card-chip"></div><div class="card-brand">PCS</div></div>
-      <div class="price-tag">19 500 FCFA</div>
-      <button class="buy-btn" onclick="openModal('PCS Mastercard')">COMMANDER MAINTENANT</button>
+  <div class="product-grid">
+    <div class="product-card">
+      <div class="card-image img-gold">
+        <div class="chip-gold"></div>
+        <div style="position:absolute; bottom:20px; left:25px; font-weight:800; color:rgba(0,0,0,0.6)">AURUM GOLD 24K</div>
+      </div>
+      <div class="product-info">
+        <h3>Aurum Gold Edition</h3>
+        <p>Le prestige absolu. Carte plaquée or avec services VIP inclus.</p>
+        <div class="price">95 000 FCFA</div>
+        <button class="btn-buy" onclick="openModal('Aurum Gold')">COMMANDER</button>
+      </div>
     </div>
-    <div class="item-box">
-      <div class="real-card revolut" style="width:100%"><div class="card-chip"></div><div class="card-brand">REVOLUT</div></div>
-      <div class="price-tag">45 000 FCFA</div>
-      <button class="buy-btn" onclick="openModal('Revolut Metal')">COMMANDER MAINTENANT</button>
-    </div>
-    <div class="item-box">
-      <div class="real-card amazon" style="width:100%"><div class="card-chip"></div><div class="card-brand">AMAZON</div></div>
-      <div class="price-tag">33 000 FCFA</div>
-      <button class="buy-btn" onclick="openModal('Amazon Gift')">COMMANDER MAINTENANT</button>
-    </div>
-  </div>
-</div>
 
-<footer>
-  <div class="footer-grid">
-    <div class="footer-col">
-      <h4>EXPLORER</h4>
-      <ul><li>Cartes prépayées</li><li>Gaming</li><li>Crypto</li></ul>
+    <div class="product-card">
+      <div class="card-image img-black">
+        <div class="chip-gold"></div>
+        <div style="position:absolute; bottom:20px; left:25px; font-weight:800; color:#fff; letter-spacing:2px">BLACK EDITION</div>
+      </div>
+      <div class="product-info">
+        <h3>Revolut Metal Black</h3>
+        <p>L'excellence technologique. Change de devises gratuit et cashback.</p>
+        <div class="price">45 000 FCFA</div>
+        <button class="btn-buy" onclick="openModal('Revolut Metal')">COMMANDER</button>
+      </div>
     </div>
-    <div class="footer-col">
-      <h4>SUPPORT</h4>
-      <ul><li>Vérifier un code</li><li>Aide 24/7</li><li>Contact</li></ul>
-    </div>
-    <div class="footer-col">
-      <h4>REJOIGNEZ-NOUS</h4>
-      <p style="color:var(--text-dim); font-size:0.8rem;">Suivez l'actualité et les promos sur nos réseaux.</p>
-      <div class="social-row">
-        <a href="https://wa.me/TON_NUMERO" class="social-icon" title="WhatsApp">WA</a>
-        <a href="https://facebook.com/TON_PROFIL" class="social-icon" title="Facebook">FB</a>
-        <a href="https://instagram.com/TON_PROFIL" class="social-icon" title="Instagram">IG</a>
+
+    <div class="product-card">
+      <div class="card-image img-blue">
+        <div class="chip-gold"></div>
+        <div style="position:absolute; bottom:20px; left:25px; font-weight:800; color:#fff">PCS CHROME</div>
+      </div>
+      <div class="product-info">
+        <h3>Mastercard PCS</h3>
+        <p>La carte prépayée n°1. Sans compte bancaire et sans engagement.</p>
+        <div class="price">19 500 FCFA</div>
+        <button class="btn-buy" onclick="openModal('PCS Chrome')">COMMANDER</button>
       </div>
     </div>
   </div>
-  <div style="margin-top:4rem; border-top:1px solid rgba(255,255,255,0.05); padding-top:2rem; display:flex; justify-content:space-between; font-size:0.75rem; color:#444;">
+</main>
+
+<footer>
+  <div class="footer-content">
+    <div class="footer-col">
+      <h4>Navigation</h4>
+      <p style="color:var(--text-dim); font-size:0.9rem;">Cartes de paiement<br>Cartes cadeaux<br>Service client</p>
+    </div>
+    <div class="footer-col">
+      <h4>Nous contacter</h4>
+      <div class="social-links">
+        <a href="https://wa.me/22900000000" class="social-btn wa">WhatsApp</a>
+        <a href="https://facebook.com/tonprofil" class="social-btn fb">Facebook</a>
+      </div>
+    </div>
+  </div>
+  <div style="margin-top:3rem; color:#444; font-size:0.75rem; display:flex; justify-content:space-between;">
     <p>© 2026 DUNDLE.PRO — TOUS DROITS RÉSERVÉS</p>
-    <p>PAIEMENTS SÉCURISÉS : VISA | OM | WAVE</p>
+    <p>ORANGE | WAVE | MOOV | VISA</p>
   </div>
 </footer>
 
-<div class="modal" id="pop">
+<div class="modal" id="orderModal">
   <div class="modal-content">
-    <h3 id="mTitle" style="margin-bottom:20px; font-size:1.5rem;">Produit</h3>
-    <form onsubmit="finish(event)">
-      <input type="text" placeholder="Nom et Prénom" required>
+    <h2 id="mTitle" style="color: var(--primary); margin-bottom:20px;">Produit</h2>
+    <form onsubmit="event.preventDefault(); alert('Commande reçue !'); closeModal();">
+      <input type="text" placeholder="Nom complet" required>
       <input type="tel" placeholder="Numéro WhatsApp" required>
-      <button type="submit" class="buy-btn">VALIDER L'ACHAT</button>
+      <button type="submit" class="btn-buy">VALIDER L'ACHAT</button>
     </form>
-    <button onclick="closeModal()" style="background:none; border:none; color:#555; margin-top:20px; cursor:pointer; width:100%;">RETOUR</button>
+    <button onclick="closeModal()" style="background:none; border:none; color:#555; margin-top:20px; cursor:pointer; width:100%;">ANNULER</button>
   </div>
 </div>
 
 <script>
-  let c = 0;
   function openModal(t) {
     document.getElementById('mTitle').innerText = t;
-    document.getElementById('pop').style.display = 'flex';
+    document.getElementById('orderModal').style.display = 'flex';
   }
-  function closeModal() { document.getElementById('pop').style.display = 'none'; }
-  function finish(e) {
-    e.preventDefault();
-    c++;
-    document.getElementById('cart').innerText = c;
-    alert("Demande reçue ! Un agent vous contacte immédiatement.");
-    closeModal();
-  }
+  function closeModal() { document.getElementById('orderModal').style.display = 'none'; }
 </script>
 
 </body>
