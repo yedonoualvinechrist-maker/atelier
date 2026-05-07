@@ -1,256 +1,232 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AURUM CARD — L'excellence au quotidien</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --gold: #D4AF37;
-    --gold-bright: #FFD700;
-    --bg-dark: #121417; /* Gris très sombre au lieu de noir */
-    --surface: #1E2126; /* Surface plus claire pour le relief */
-    --text: #F8F9FA;
-    --muted: #A0A0A0;
-    --accent: rgba(212, 175, 55, 0.15);
-    --glass: rgba(255, 255, 255, 0.03);
-  }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L'ATELIER — Haute Couture & Horlogerie</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Montserrat:wght@200;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #b38e5d;
+            --black: #1a1a1a;
+            --white: #ffffff;
+            --cream: #f9f7f2;
+            --grey: #888;
+        }
 
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    background-color: var(--bg-dark);
-    color: var(--text);
-    font-family: 'Montserrat', sans-serif;
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  /* --- NAVIGATION MODERNE --- */
-  nav {
-    position: fixed; top: 0; width: 100%; z-index: 1000;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 1.5rem 5%;
-    backdrop-filter: blur(15px);
-    background: rgba(18, 20, 23, 0.8);
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-  }
-  .logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.8rem; font-weight: 600; letter-spacing: 2px;
-    color: var(--gold); text-decoration: none;
-  }
-  .nav-links { display: flex; gap: 3rem; list-style: none; }
-  .nav-links a {
-    text-decoration: none; color: var(--text); font-size: 0.75rem;
-    text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;
-  }
-  .nav-links a:hover { color: var(--gold); }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--white);
+            color: var(--black);
+            overflow-x: hidden;
+        }
 
-  /* --- HERO AMÉLIORÉ --- */
-  .hero {
-    height: 100vh; display: flex; align-items: center; justify-content: center;
-    padding: 0 5%; background: radial-gradient(circle at top right, #1e2530 0%, var(--bg-dark) 60%);
-  }
-  .hero-content { flex: 1; max-width: 600px; }
-  .hero-visual { flex: 1; display: flex; justify-content: center; perspective: 1000px; }
+        /* --- NAVIGATION --- */
+        nav {
+            padding: 1.5rem 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            background: var(--white); border-bottom: 1px solid #eee;
+            position: sticky; top: 0; z-index: 100;
+        }
+        .logo { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 500; letter-spacing: 3px; }
+        .cart-icon { position: relative; cursor: pointer; }
+        .cart-count { 
+            position: absolute; top: -10px; right: -10px; 
+            background: var(--gold); color: white; font-size: 0.7rem;
+            padding: 2px 6px; border-radius: 50%;
+        }
 
-  .hero h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(3rem, 6vw, 5rem); line-height: 1.1; margin-bottom: 1.5rem;
-  }
-  .hero h1 span { color: var(--gold); font-style: italic; }
+        /* --- HERO --- */
+        .hero {
+            height: 60vh; background: var(--cream);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center; padding: 0 5%;
+        }
+        .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 5vw, 4rem); font-style: italic; margin-bottom: 1rem; }
+        .hero p { text-transform: uppercase; letter-spacing: 4px; font-size: 0.8rem; color: var(--grey); }
 
-  /* --- CARTE INTERACTIVE --- */
-  .card-3d {
-    width: 400px; height: 250px;
-    background: linear-gradient(135deg, #2c2c2c 0%, #000 100%);
-    border-radius: 20px; position: relative;
-    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
-    transition: transform 0.1s ease-out;
-    transform-style: preserve-3d;
-    padding: 2rem; display: flex; flex-direction: column; justify-content: space-between;
-    border: 1px solid rgba(255,255,255,0.1);
-  }
-  .card-3d:hover {
-    border: 1px solid var(--gold);
-  }
-  .card-chip {
-    width: 50px; height: 40px; background: linear-gradient(135deg, #e0c068, #b8860b);
-    border-radius: 8px;
-  }
+        /* --- FILTRES DE CATÉGORIE --- */
+        .category-nav {
+            display: flex; justify-content: center; gap: 3rem;
+            padding: 3rem 0; background: var(--white);
+        }
+        .cat-btn {
+            background: none; border: none; font-family: inherit;
+            text-transform: uppercase; letter-spacing: 2px; font-size: 0.75rem;
+            cursor: pointer; color: var(--grey); transition: 0.3s;
+            padding-bottom: 5px; border-bottom: 1px solid transparent;
+        }
+        .cat-btn.active { color: var(--black); border-bottom: 1px solid var(--gold); font-weight: 600; }
 
-  /* --- SECTION SIMULATEUR (INTERACTION) --- */
-  .simulator {
-    padding: 6rem 5%; background: var(--surface); text-align: center;
-  }
-  .sim-container {
-    max-width: 800px; margin: 3rem auto;
-    background: var(--bg-dark); padding: 3rem; border-radius: 20px;
-    border: 1px solid var(--accent);
-  }
-  .range-slider {
-    width: 100%; margin: 2rem 0; accent-color: var(--gold);
-  }
-  .earnings-box {
-    font-size: 2.5rem; font-family: 'Cormorant Garamond', serif; color: var(--gold);
-    margin-top: 1rem;
-  }
+        /* --- GRILLE DE PRODUITS --- */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2px; background: #eee; /* Créer un effet de bordure fine */
+            padding: 2px;
+        }
+        .product-card {
+            background: var(--white); padding: 2rem;
+            text-align: center; transition: 0.4s ease;
+            position: relative; overflow: hidden;
+        }
+        .product-card:hover { background: var(--cream); }
+        .product-image {
+            width: 100%; height: 350px;
+            background-color: #f0f0f0; margin-bottom: 1.5rem;
+            object-fit: cover; transition: transform 0.5s;
+        }
+        .product-card:hover .product-image { transform: scale(1.05); }
+        .product-category { font-size: 0.65rem; color: var(--gold); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.5rem; }
+        .product-title { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; margin-bottom: 0.5rem; }
+        .product-price { font-weight: 200; color: var(--black); letter-spacing: 1px; }
 
-  /* --- GRID DES OFFRES --- */
-  .plans { padding: 6rem 5%; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-  .plan-card {
-    background: var(--surface); padding: 3rem 2rem; border-radius: 20px;
-    transition: 0.4s; border: 1px solid transparent;
-    display: flex; flex-direction: column;
-  }
-  .plan-card:hover {
-    transform: translateY(-10px); border-color: var(--gold);
-    background: rgba(255,255,255,0.02);
-  }
-  .plan-card h3 { font-family: 'Cormorant Garamond', serif; fontSize: 2rem; color: var(--gold); margin-bottom: 1rem; }
-  .price { font-size: 1.5rem; font-weight: 600; margin-bottom: 2rem; }
-  .price span { font-size: 0.9rem; color: var(--muted); }
+        .btn-add {
+            margin-top: 1.5rem; padding: 0.8rem 2rem;
+            background: var(--black); color: var(--white);
+            border: none; text-transform: uppercase; font-size: 0.7rem;
+            letter-spacing: 2px; cursor: pointer; transition: 0.3s;
+            opacity: 0; transform: translateY(10px);
+        }
+        .product-card:hover .btn-add { opacity: 1; transform: translateY(0); }
+        .btn-add:hover { background: var(--gold); }
 
-  /* --- BOUTONS --- */
-  .btn {
-    padding: 1rem 2.5rem; border-radius: 50px; text-transform: uppercase;
-    font-size: 0.75rem; font-weight: 600; cursor: pointer; transition: 0.3s;
-    letter-spacing: 1px; text-decoration: none; display: inline-block;
-  }
-  .btn-gold { background: var(--gold); color: var(--bg-dark); border: none; }
-  .btn-gold:hover { background: var(--gold-bright); transform: scale(1.05); }
+        /* --- MODAL D'ACHAT --- */
+        #checkout-modal {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.8);
+            display: none; align-items: center; justify-content: center; z-index: 1000;
+        }
+        .modal-content {
+            background: var(--white); padding: 3rem; width: 90%; max-width: 500px;
+            border-radius: 0; text-align: center; animation: fadeIn 0.3s;
+        }
 
-  /* ANIMATIONS */
-  [data-reveal] { opacity: 0; transform: translateY(30px); transition: 1s all ease; }
-  .active-reveal { opacity: 1; transform: translateY(0); }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-</style>
+        input {
+            width: 100%; padding: 1rem; margin: 0.5rem 0;
+            border: 1px solid #ddd; font-family: inherit;
+        }
+
+        @media (max-width: 768px) {
+            .category-nav { gap: 1rem; }
+            .product-image { height: 250px; }
+        }
+    </style>
 </head>
 <body>
 
 <nav>
-  <a href="#" class="logo">AURUM</a>
-  <ul class="nav-links">
-    <li><a href="#sim">Simulateur</a></li>
-    <li><a href="#plans">Offres</a></li>
-    <li><a href="#contact">Privilèges</a></li>
-  </ul>
-  <a href="#" class="btn btn-gold" style="padding: 0.6rem 1.5rem;">Ouvrir un compte</a>
+    <div class="logo">L'ATELIER</div>
+    <div class="cart-icon" onclick="openCheckout()">
+        <span style="font-size: 0.8rem; letter-spacing: 1px;">PANIER</span>
+        <span class="cart-count" id="count">0</span>
+    </div>
 </nav>
 
 <section class="hero">
-  <div class="hero-content">
-    <h1>L'argent est un art, <span>laissez-le briller.</span></h1>
-    <p style="color: var(--muted); margin-bottom: 2.5rem; font-size: 1.1rem;">
-      Rejoignez l'élite bancaire avec une carte conçue pour transformer vos dépenses en expériences inoubliables.
-    </p>
-    <a href="#plans" class="btn btn-gold">Découvrir les offres</a>
-  </div>
-  <div class="hero-visual">
-    <div class="card-3d" id="card">
-      <div class="card-chip"></div>
-      <div style="font-size: 1.2rem; letter-spacing: 4px; color: rgba(255,255,255,0.8);">
-        **** **** **** 8892
-      </div>
-      <div style="display: flex; justify-content: space-between; align-items: flex-end;">
-        <div>
-          <p style="font-size: 0.6rem; text-transform: uppercase; color: var(--muted);">Titulaire</p>
-          <p style="font-size: 0.9rem; letter-spacing: 1px;">ALEXANDRE MOREAU</p>
-        </div>
-        <div style="text-align: right;">
-           <p style="font-family: 'Cormorant Garamond', serif; font-weight: bold; color: var(--gold);">AURUM</p>
-        </div>
-      </div>
+    <p>Édition Limitée</p>
+    <h1>L'élégance à l'état pur.</h1>
+</section>
+
+<div class="category-nav">
+    <button class="cat-btn active" onclick="filter('all')">Tout voir</button>
+    <button class="cat-btn" onclick="filter('vetements')">Vêtements</button>
+    <button class="cat-btn" onclick="filter('chaussures')">Chaussures</button>
+    <button class="cat-btn" onclick="filter('montres')">Montres</button>
+</div>
+
+<div class="product-grid" id="grid">
+    <div class="product-card" data-cat="vetements">
+        <div class="product-category">Vêtements</div>
+        <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=500" alt="Veste" class="product-image">
+        <h3 class="product-title">Veste en cachemire beige</h3>
+        <p class="product-price">1 250,00 €</p>
+        <button class="btn-add" onclick="addToCart()">Ajouter au panier</button>
     </div>
-  </div>
-</section>
 
-<section class="simulator" id="sim">
-  <div data-reveal>
-    <p style="color: var(--gold); text-transform: uppercase; letter-spacing: 3px; font-size: 0.8rem;">Rentabilité</p>
-    <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 3rem; margin: 1rem 0;">Calculez vos <em>gains mensuels</em></h2>
-  </div>
-  
-  <div class="sim-container" data-reveal>
-    <p>Mes dépenses mensuelles estimées :</p>
-    <input type="range" min="100000" max="5000000" step="50000" value="500000" class="range-slider" id="expenseRange">
-    <div style="font-size: 1.5rem; margin-bottom: 2rem;"><span id="expenseVal">500 000</span> FCFA</div>
-    
-    <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem;">
-      <p style="color: var(--muted);">Avec le Cashback Platine (5%), vous récupérez :</p>
-      <div class="earnings-box"><span id="cashbackVal">25 000</span> FCFA</div>
-      <p style="font-size: 0.8rem; color: var(--gold); margin-top: 1rem;">Soit 300 000 FCFA par an.</p>
+    <div class="product-card" data-cat="chaussures">
+        <div class="product-category">Chaussures</div>
+        <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=500" alt="Chaussures" class="product-image">
+        <h3 class="product-title">Derbies en cuir patiné</h3>
+        <p class="product-price">890,00 €</p>
+        <button class="btn-add" onclick="addToCart()">Ajouter au panier</button>
     </div>
-  </div>
-</section>
 
-<section class="plans" id="plans">
-  <div class="plan-card" data-reveal>
-    <h3>Argent</h3>
-    <div class="price">9 900 <span>/ mois</span></div>
-    <ul style="list-style: none; color: var(--muted); margin-bottom: 2rem; flex-grow: 1;">
-      <li style="margin-bottom: 0.8rem;">✓ Cashback 1.5%</li>
-      <li style="margin-bottom: 0.8rem;">✓ Assurance basique</li>
-      <li style="margin-bottom: 0.8rem;">✓ Support App 24/7</li>
-    </ul>
-    <a href="#" class="btn" style="border: 1px solid var(--gold); color: var(--gold);">Choisir Argent</a>
-  </div>
+    <div class="product-card" data-cat="montres">
+        <div class="product-category">Montres</div>
+        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=500" alt="Montre" class="product-image">
+        <h3 class="product-title">Chronographe Solaire</h3>
+        <p class="product-price">4 500,00 €</p>
+        <button class="btn-add" onclick="addToCart()">Ajouter au panier</button>
+    </div>
 
-  <div class="plan-card" style="background: rgba(212, 175, 55, 0.05); border-color: var(--gold);" data-reveal>
-    <div style="background: var(--gold); color: #000; padding: 0.2rem 1rem; border-radius: 20px; font-size: 0.6rem; width: fit-content; margin-bottom: 1rem; font-weight: bold;">POPULAIRE</div>
-    <h3>Or</h3>
-    <div class="price">24 900 <span>/ mois</span></div>
-    <ul style="list-style: none; color: var(--muted); margin-bottom: 2rem; flex-grow: 1;">
-      <li style="margin-bottom: 0.8rem;">✓ Cashback 3% illimité</li>
-      <li style="margin-bottom: 0.8rem;">✓ Conciergerie Privée</li>
-      <li style="margin-bottom: 0.8rem;">✓ Accès Salons VIP</li>
-    </ul>
-    <a href="#" class="btn btn-gold">Choisir Or</a>
-  </div>
+    <div class="product-card" data-cat="vetements">
+        <div class="product-category">Vêtements</div>
+        <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=500" alt="Manteau" class="product-image">
+        <h3 class="product-title">Manteau en laine vierge</h3>
+        <p class="product-price">2 100,00 €</p>
+        <button class="btn-add" onclick="addToCart()">Ajouter au panier</button>
+    </div>
+</div>
 
-  <div class="plan-card" data-reveal>
-    <h3>Platine</h3>
-    <div class="price">59 900 <span>/ mois</span></div>
-    <ul style="list-style: none; color: var(--muted); margin-bottom: 2rem; flex-grow: 1;">
-      <li style="margin-bottom: 0.8rem;">✓ Cashback 5% maximum</li>
-      <li style="margin-bottom: 0.8rem;">✓ Conseiller dédié</li>
-      <li style="margin-bottom: 0.8rem;">✓ Assurance Premium</li>
-    </ul>
-    <a href="#" class="btn" style="border: 1px solid var(--gold); color: var(--gold);">Choisir Platine</a>
-  </div>
-</section>
+<div id="checkout-modal">
+    <div class="modal-content">
+        <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 2rem; margin-bottom: 2rem;">Votre Commande</h2>
+        <form onsubmit="event.preventDefault(); alert('Merci pour votre achat luxueux !'); location.reload();">
+            <input type="text" placeholder="Nom complet" required>
+            <input type="email" placeholder="Adresse email" required>
+            <input type="text" placeholder="Adresse de livraison" required>
+            <div style="margin: 1.5rem 0; font-size: 0.9rem; color: var(--grey);">Mode de paiement sécurisé par carte</div>
+            <input type="text" placeholder="Numéro de carte (0000 0000 ...)" required>
+            <button type="submit" class="btn-add" style="opacity: 1; transform: none; width: 100%; margin-top: 1rem;">Payer maintenant</button>
+        </form>
+        <button onclick="closeCheckout()" style="background:none; border:none; margin-top: 1rem; cursor:pointer; color: var(--grey);">Annuler</button>
+    </div>
+</div>
 
 <script>
-  // Interaction de la carte (inclinaison 3D au mouvement de la souris)
-  const card = document.getElementById('card');
-  document.addEventListener('mousemove', (e) => {
-    let xAxis = (window.innerWidth / 2 - e.pageX) / 25;
-    let yAxis = (window.innerHeight / 2 - e.pageY) / 25;
-    card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
-  });
+    let cartCount = 0;
 
-  // Simulateur de Cashback
-  const range = document.getElementById('expenseRange');
-  const expVal = document.getElementById('expenseVal');
-  const cashVal = document.getElementById('cashbackVal');
+    // Gestion du panier
+    function addToCart() {
+        cartCount++;
+        document.getElementById('count').innerText = cartCount;
+        alert("Article ajouté à votre sélection.");
+    }
 
-  range.addEventListener('input', (e) => {
-    let val = parseInt(e.target.value);
-    expVal.innerText = val.toLocaleString();
-    cashVal.innerText = (val * 0.05).toLocaleString();
-  });
+    // Filtrage des catégories
+    function filter(category) {
+        // Update buttons
+        document.querySelectorAll('.cat-btn').forEach(btn => {
+            btn.classList.remove('active');
+            if(btn.innerText.toLowerCase() === category || (category === 'all' && btn.innerText === 'Tout voir')) {
+                btn.classList.add('active');
+            }
+        });
 
-  // Animation au scroll (Reveal)
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('active-reveal');
-      }
-    });
-  }, { threshold: 0.1 });
+        // Update items
+        const cards = document.querySelectorAll('.product-card');
+        cards.forEach(card => {
+            if (category === 'all' || card.getAttribute('data-cat') === category) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
 
-  document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
+    // Modal
+    function openCheckout() {
+        if(cartCount === 0) return alert("Votre panier est vide.");
+        document.getElementById('checkout-modal').style.display = 'flex';
+    }
+
+    function closeCheckout() {
+        document.getElementById('checkout-modal').style.display = 'none';
+    }
 </script>
 
 </body>
