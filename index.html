@@ -3,269 +3,249 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>L'ATELIER — Haute Couture & Horlogerie</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Montserrat:wght@200;400;600&display=swap" rel="stylesheet">
+    <title>NOIR & OR — Maison de Couture</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --gold: #b38e5d;
-            --black: #1a1a1a;
-            --white: #ffffff;
-            --cream: #f9f7f2;
-            --grey: #888;
+            --bg-deep: #0a0a0a;
+            --surface: #141414;
+            --accent: #d4af37;
+            --text-primary: #e5e5e5;
+            --text-muted: #888;
+            --glass: rgba(255, 255, 255, 0.03);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: var(--white);
-            color: var(--black);
+            background-color: var(--bg-deep);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
             overflow-x: hidden;
         }
 
         /* --- NAVIGATION --- */
         nav {
-            padding: 1.5rem 5%;
+            position: fixed; top: 0; width: 100%; z-index: 1000;
             display: flex; justify-content: space-between; align-items: center;
-            background: var(--white); border-bottom: 1px solid #eee;
-            position: sticky; top: 0; z-index: 100;
+            padding: 1.5rem 5%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
-        .logo { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 500; letter-spacing: 3px; }
-        .cart-icon { position: relative; cursor: pointer; }
-        .cart-count { 
-            position: absolute; top: -10px; right: -10px; 
-            background: var(--gold); color: white; font-size: 0.7rem;
-            padding: 2px 6px; border-radius: 50%;
-        }
+        .logo { font-family: 'Playfair Display', serif; font-size: 1.8rem; letter-spacing: 4px; font-weight: 700; }
+        .nav-tools { display: flex; gap: 2rem; align-items: center; }
+        .cart-trigger { cursor: pointer; position: relative; font-weight: 600; font-size: 0.8rem; }
+        .badge { background: var(--accent); color: black; padding: 2px 6px; border-radius: 50%; font-size: 0.6rem; position: absolute; -10px; right: -15px; }
 
         /* --- HERO --- */
         .hero {
-            height: 60vh; background: var(--cream);
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            text-align: center; padding: 0 5%;
+            height: 50vh; display: flex; flex-direction: column; justify-content: center;
+            padding: 0 5%; background: linear-gradient(to bottom, #111, var(--bg-deep));
+            border-bottom: 1px solid var(--glass);
         }
-        .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 5vw, 4rem); font-style: italic; margin-bottom: 1rem; }
-        .hero p { text-transform: uppercase; letter-spacing: 4px; font-size: 0.8rem; color: var(--grey); }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: 3.5rem; margin-bottom: 1rem; }
+        .hero p { color: var(--text-muted); text-transform: uppercase; letter-spacing: 5px; font-size: 0.7rem; }
 
-        /* --- FILTRES DE CATÉGORIE --- */
-        .category-nav {
-            display: flex; justify-content: center; gap: 3rem;
-            padding: 3rem 0; background: var(--white);
+        /* --- FILTRES --- */
+        .filters {
+            display: flex; gap: 2rem; padding: 2rem 5%; background: var(--bg-deep);
+            position: sticky; top: 70px; z-index: 900;
         }
-        .cat-btn {
-            background: none; border: none; font-family: inherit;
-            text-transform: uppercase; letter-spacing: 2px; font-size: 0.75rem;
-            cursor: pointer; color: var(--grey); transition: 0.3s;
-            padding-bottom: 5px; border-bottom: 1px solid transparent;
+        .filter-btn {
+            background: none; border: none; color: var(--text-muted);
+            cursor: pointer; font-size: 0.75rem; text-transform: uppercase;
+            letter-spacing: 2px; transition: 0.3s;
         }
-        .cat-btn.active { color: var(--black); border-bottom: 1px solid var(--gold); font-weight: 600; }
+        .filter-btn:hover, .filter-btn.active { color: var(--accent); }
 
         /* --- GRILLE DE PRODUITS --- */
-        .product-grid {
+        .shop-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2px; background: #eee; /* Créer un effet de bordure fine */
-            padding: 2px;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            padding: 0 2px; gap: 2px;
+            background: rgba(255,255,255,0.05);
         }
-        .product-card {
-            background: var(--white); padding: 2rem;
-            text-align: center; transition: 0.4s ease;
-            position: relative; overflow: hidden;
+        .product-item {
+            background: var(--bg-deep); padding: 3rem 2rem;
+            position: relative; transition: 0.5s ease;
+            cursor: pointer;
         }
-        .product-card:hover { background: var(--cream); }
-        .product-image {
-            width: 100%; height: 350px;
-            background-color: #f0f0f0; margin-bottom: 1.5rem;
-            object-fit: cover; transition: transform 0.5s;
+        .product-item:hover { background: var(--surface); }
+        .product-img {
+            width: 100%; height: 450px; object-fit: cover;
+            filter: grayscale(0.2); transition: 0.5s;
+            margin-bottom: 2rem;
         }
-        .product-card:hover .product-image { transform: scale(1.05); }
-        .product-category { font-size: 0.65rem; color: var(--gold); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.5rem; }
-        .product-title { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; margin-bottom: 0.5rem; }
-        .product-price { font-weight: 200; color: var(--black); letter-spacing: 1px; }
+        .product-item:hover .product-img { filter: grayscale(0); transform: scale(1.02); }
+        
+        .product-info { display: flex; justify-content: space-between; align-items: flex-start; }
+        .product-name { font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-bottom: 0.5rem; }
+        .product-tag { font-size: 0.6rem; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.5rem; }
+        .product-price { font-weight: 300; font-size: 0.9rem; color: var(--text-muted); }
 
-        .btn-add {
-            margin-top: 1.5rem; padding: 0.8rem 2rem;
-            background: var(--black); color: var(--white);
-            border: none; text-transform: uppercase; font-size: 0.7rem;
+        .add-btn {
+            margin-top: 2rem; width: 100%; padding: 1rem;
+            background: transparent; border: 1px solid var(--accent);
+            color: var(--accent); text-transform: uppercase; font-size: 0.7rem;
             letter-spacing: 2px; cursor: pointer; transition: 0.3s;
-            opacity: 0; transform: translateY(10px);
         }
-        .product-card:hover .btn-add { opacity: 1; transform: translateY(0); }
-        .btn-add:hover { background: var(--gold); }
+        .add-btn:hover { background: var(--accent); color: black; }
 
-        /* --- MODAL D'ACHAT --- */
-        #checkout-modal {
-            position: fixed; inset: 0; background: rgba(0,0,0,0.8);
-            display: none; align-items: center; justify-content: center; z-index: 1000;
+        /* --- PANIER LATÉRAL (SIDE DRAWER) --- */
+        .cart-drawer {
+            position: fixed; top: 0; right: -400px; width: 400px; height: 100%;
+            background: var(--surface); z-index: 2000; padding: 3rem 2rem;
+            box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex; flex-direction: column;
         }
-        .modal-content {
-            background: var(--white); padding: 3rem; width: 90%; max-width: 500px;
-            border-radius: 0; text-align: center; animation: fadeIn 0.3s;
+        .cart-drawer.open { right: 0; }
+        .cart-header { display: flex; justify-content: space-between; margin-bottom: 3rem; }
+        .close-cart { cursor: pointer; font-size: 0.8rem; color: var(--text-muted); }
+        
+        .cart-items { flex: 1; border-top: 1px solid var(--glass); padding-top: 1rem; }
+        .cart-item-row { display: flex; gap: 1rem; margin-bottom: 1.5rem; font-size: 0.8rem; }
+        
+        .checkout-btn {
+            background: var(--text-primary); color: var(--bg-deep);
+            padding: 1.2rem; border: none; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 2px; cursor: pointer;
         }
 
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-        input {
-            width: 100%; padding: 1rem; margin: 0.5rem 0;
-            border: 1px solid #ddd; font-family: inherit;
+        .overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.7);
+            display: none; z-index: 1500;
         }
 
         @media (max-width: 768px) {
-            .category-nav { gap: 1rem; }
-            .product-image { height: 250px; }
+            .cart-drawer { width: 100%; right: -100%; }
+            .hero h1 { font-size: 2.5rem; }
         }
     </style>
 </head>
 <body>
 
 <nav>
-    <div class="logo">L'ATELIER</div>
-    <div class="cart-icon" onclick="openCheckout()">
-        <span style="font-size: 0.8rem; letter-spacing: 1px;">PANIER</span>
-        <span class="cart-count" id="count">0</span>
+    <div class="logo">NOIR.</div>
+    <div class="nav-tools">
+        <span class="filter-btn">Rechercher</span>
+        <div class="cart-trigger" onclick="toggleCart(true)">
+            PANIER <span class="badge" id="cart-count">0</span>
+        </div>
     </div>
 </nav>
 
 <section class="hero">
-    <p>Édition Limitée</p>
-    <h1>L'élégance à l'état pur.</h1>
+    <p>Nouvelle Collection 2026</p>
+    <h1>Redéfinir l'Essentiel.</h1>
 </section>
 
-<div class="category-nav">
-    <button class="cat-btn active" onclick="filter('all')">Tout voir</button>
-    <button class="cat-btn" onclick="filter('vetements')">Vêtements</button>
-    <button class="cat-btn" onclick="filter('chaussures')">Chaussures</button>
-    <button class="cat-btn" onclick="filter('montres')">Montres</button>
+<div class="filters">
+    <button class="filter-btn active">Tous</button>
+    <button class="filter-btn">Femme</button>
+    <button class="filter-btn">Homme</button>
+    <button class="filter-btn">Accessoires</button>
 </div>
 
-<div class="product-grid" id="grid">
-    <div class="product-card" data-cat="vetements">
-        <div class="product-category">Vêtements</div>
-        <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=500" alt="Veste" class="product-image">
-        <h3 class="product-title">Veste en cachemire beige</h3>
-        <p class="product-price">1 250,00 €</p>
-        <button class="btn-add" onclick="addToCart()">Ajouter au panier</button>
+<div class="shop-container">
+    <div class="product-item">
+        <div class="product-tag">Femme — Couture</div>
+        <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=600" class="product-img">
+        <div class="product-info">
+            <div>
+                <h3 class="product-name">Manteau Long en Laine</h3>
+                <p class="product-price">2 450,00 €</p>
+            </div>
+        </div>
+        <button class="add-btn" onclick="addToCart('Manteau Laine', 2450)">Ajouter au panier</button>
     </div>
 
-    <div class="product-card" data-cat="chaussures">
-        <div class="product-category">Chaussures</div>
-        <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=500" alt="Chaussures" class="product-image">
-        <h3 class="product-title">Derbies en cuir patiné</h3>
-        <p class="product-price">890,00 €</p>
-        <button class="btn-add" onclick="addToCart()">Ajouter au panier</button>
+    <div class="product-item">
+        <div class="product-tag">Homme — Tailoring</div>
+        <img src="https://images.unsplash.com/photo-1594932224011-04504ce5ade8?auto=format&fit=crop&w=600" class="product-img">
+        <div class="product-info">
+            <div>
+                <h3 class="product-name">Veste de Costume Slim</h3>
+                <p class="product-price">1 890,00 €</p>
+            </div>
+        </div>
+        <button class="add-btn" onclick="addToCart('Veste Slim', 1890)">Ajouter au panier</button>
     </div>
 
-    <div class="product-card" data-cat="montres">
-        <div class="product-category">Montres</div>
-        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=500" alt="Montre" class="product-image">
-        <h3 class="product-title">Chronographe Solaire</h3>
-        <p class="product-price">4 500,00 €</p>
-        <button class="btn-add" onclick="addToCart()">Ajouter au panier</button>
-    </div>
-
-    <div class="product-card" data-cat="vetements">
-        <div class="product-category">Vêtements</div>
-        <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=500" alt="Manteau" class="product-image">
-        <h3 class="product-title">Manteau en laine vierge</h3>
-        <p class="product-price">2 100,00 €</p>
-        <button class="btn-add" onclick="addToCart()">Ajouter au panier</button>
+    <div class="product-item">
+        <div class="product-tag">Accessoires</div>
+        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600" class="product-img">
+        <div class="product-info">
+            <div>
+                <h3 class="product-name">Montre Chronographe Noire</h3>
+                <p class="product-price">3 200,00 €</p>
+            </div>
+        </div>
+        <button class="add-btn" onclick="addToCart('Montre Chrono', 3200)">Ajouter au panier</button>
     </div>
 </div>
 
-<div id="checkout-modal">
-    <div class="modal-content">
-        <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 2rem; margin-bottom: 2rem;">Votre Commande</h2>
-        <form onsubmit="event.preventDefault(); alert('Merci pour votre achat luxueux !'); location.reload();">
-            <input type="text" placeholder="Nom complet" required>
-            <input type="email" placeholder="Adresse email" required>
-            <input type="text" placeholder="Adresse de livraison" required>
-            <div style="margin: 1.5rem 0; font-size: 0.9rem; color: var(--grey);">Mode de paiement sécurisé par carte</div>
-            <input type="text" placeholder="Numéro de carte (0000 0000 ...)" required>
-            <button type="submit" class="btn-add" style="opacity: 1; transform: none; width: 100%; margin-top: 1rem;">Payer maintenant</button>
-        </form>
-        <button onclick="closeCheckout()" style="background:none; border:none; margin-top: 1rem; cursor:pointer; color: var(--grey);">Annuler</button>
+<div class="overlay" id="overlay" onclick="toggleCart(false)"></div>
+<div class="cart-drawer" id="cart-drawer">
+    <div class="cart-header">
+        <h2 style="font-family: 'Playfair Display';">Votre Panier</h2>
+        <span class="close-cart" onclick="toggleCart(false)">FERMER ✕</span>
+    </div>
+    
+    <div class="cart-items" id="cart-list">
+        <p style="color: var(--text-muted); font-size: 0.8rem;">Votre panier est actuellement vide.</p>
+    </div>
+
+    <div style="border-top: 1px solid var(--glass); padding-top: 2rem;">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 2rem;">
+            <span>TOTAL</span>
+            <span id="total-price">0,00 €</span>
+        </div>
+        <button class="checkout-btn" style="width: 100%;" onclick="alert('Redirection vers paiement sécurisé...')">Passer à la caisse</button>
     </div>
 </div>
 
 <script>
-    let cartCount = 0;
+    let cart = [];
+    let count = 0;
+    let total = 0;
 
-    // Gestion du panier
-    function addToCart() {
-        cartCount++;
-        document.getElementById('count').innerText = cartCount;
-        alert("Article ajouté à votre sélection.");
+    function toggleCart(open) {
+        const drawer = document.getElementById('cart-drawer');
+        const overlay = document.getElementById('overlay');
+        if(open) {
+            drawer.classList.add('open');
+            overlay.style.display = 'block';
+        } else {
+            drawer.classList.remove('open');
+            overlay.style.display = 'none';
+        }
     }
 
-    // Filtrage des catégories
-    function filter(category) {
-        // Update buttons
-        document.querySelectorAll('.cat-btn').forEach(btn => {
-            btn.classList.remove('active');
-            if(btn.innerText.toLowerCase() === category || (category === 'all' && btn.innerText === 'Tout voir')) {
-                btn.classList.add('active');
-            }
-        });
-
-        // Update items
-        const cards = document.querySelectorAll('.product-card');
-        cards.forEach(card => {
-            if (category === 'all' || card.getAttribute('data-cat') === category) {
-                card.style.display = 'block';
-            } else {
-                card.style.display = 'none';
-            }
-        });
+    function addToCart(name, price) {
+        cart.push({name, price});
+        count++;
+        total += price;
+        updateUI();
+        toggleCart(true);
     }
 
-    // Modal
-    function openCheckout() {
-        if(cartCount === 0) return alert("Votre panier est vide.");
-        document.getElementById('checkout-modal').style.display = 'flex';
-    }
-
-    function closeCheckout() {
-        document.getElementById('checkout-modal').style.display = 'none';
+    function updateUI() {
+        document.getElementById('cart-count').innerText = count;
+        document.getElementById('total-price').innerText = total.toLocaleString() + ",00 €";
+        
+        const list = document.getElementById('cart-list');
+        if(cart.length > 0) {
+            list.innerHTML = cart.map(item => `
+                <div class="cart-item-row">
+                    <div style="flex: 1;">${item.name}</div>
+                    <div>${item.price} €</div>
+                </div>
+            `).join('');
+        }
     }
 </script>
 
-<!-- Code injected by live-server -->
-<script>
-	// <![CDATA[  <-- For SVG support
-	if ('WebSocket' in window) {
-		(function () {
-			function refreshCSS() {
-				var sheets = [].slice.call(document.getElementsByTagName("link"));
-				var head = document.getElementsByTagName("head")[0];
-				for (var i = 0; i < sheets.length; ++i) {
-					var elem = sheets[i];
-					var parent = elem.parentElement || head;
-					parent.removeChild(elem);
-					var rel = elem.rel;
-					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
-						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
-						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
-					}
-					parent.appendChild(elem);
-				}
-			}
-			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
-			var address = protocol + window.location.host + window.location.pathname + '/ws';
-			var socket = new WebSocket(address);
-			socket.onmessage = function (msg) {
-				if (msg.data == 'reload') window.location.reload();
-				else if (msg.data == 'refreshcss') refreshCSS();
-			};
-			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
-				console.log('Live reload enabled.');
-				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
-			}
-		})();
-	}
-	else {
-		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
-	}
-	// ]]>
-</script>
 </body>
 </html>
