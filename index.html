@@ -3,165 +3,163 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AURUM | Cartes Haute Performance</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,400&family=Inter:wght@300;500;800&display=swap" rel="stylesheet">
+  <title>PRO-CARDS — Distributeur Officiel</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --gold: #D4AF37;
-      --bg: #050505;
-      --card-bg: #111111;
+      --bg: #0f1115;
+      --card-bg: #1a1d23;
+      --accent: #d4af37;
       --text: #ffffff;
+      --text-dim: #94a3b8;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { 
-        background-color: var(--bg); 
-        color: var(--text); 
-        font-family: 'Inter', sans-serif;
-        overflow-x: hidden;
+    body { background-color: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; }
+
+    header {
+      padding: 2rem 5%; text-align: center;
+      background: linear-gradient(to bottom, #1a1d23, var(--bg));
+    }
+    header h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; }
+    header p { color: var(--accent); letter-spacing: 2px; text-transform: uppercase; font-size: 0.8rem; }
+
+    /* --- GRILLE DE PRODUITS --- */
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem; padding: 3rem 5%;
     }
 
-    /* --- ANIMATION DE FOND --- */
-    body::before {
-        content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-        background: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #050505 100%);
-        z-index: -1;
+    .product-card {
+      background: var(--card-bg);
+      border-radius: 24px;
+      padding: 1.5rem;
+      border: 1px solid rgba(255,255,255,0.05);
+      transition: all 0.3s ease;
+      display: flex; flex-direction: column;
+    }
+    .product-card:hover { transform: translateY(-10px); border-color: var(--accent); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+
+    /* Rendu Visuel des Cartes */
+    .card-visual {
+      width: 100%; height: 160px;
+      border-radius: 15px;
+      margin-bottom: 1.5rem;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      font-weight: bold; font-size: 1.2rem; box-shadow: inset 0 0 50px rgba(0,0,0,0.2);
     }
 
-    nav {
-      padding: 2rem 5%; display: flex; justify-content: space-between; align-items: center;
-      position: sticky; top: 0; z-index: 100; backdrop-filter: blur(10px);
-    }
-    .logo { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--gold); font-weight: bold; text-decoration: none; letter-spacing: 3px; }
+    /* Styles Couleurs Marché */
+    .pcs-style { background: linear-gradient(135deg, #0054a6, #003366); }
+    .nickel-style { background: linear-gradient(135deg, #ff5f00, #e65600); }
+    .revolut-style { background: linear-gradient(135deg, #1d2023, #434343); border: 1px solid #ffffff22; }
+    .aurum-style { background: linear-gradient(135deg, #d4af37, #b8962e); color: #000; }
 
-    /* --- HERO DYNAMIQUE --- */
-    .hero {
-      height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
-      text-align: center; padding: 0 5%;
-    }
-    .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 8vw, 6rem); line-height: 1; margin-bottom: 20px; }
-    .hero p { font-size: 1.2rem; color: #888; max-width: 600px; font-weight: 300; }
-
-    /* --- GRILLE DE LUXE --- */
-    .market-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 40px; padding: 5rem 5%; perspective: 1000px;
-    }
-
-    .card-item {
-      background: var(--card-bg); border-radius: 30px; padding: 40px;
-      border: 1px solid rgba(255,255,255,0.05); position: relative;
-      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      overflow: hidden; cursor: pointer;
-    }
-    .card-item:hover { transform: scale(1.02) translateY(-10px); border-color: var(--gold); box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
-
-    /* Rendu Visuel de la Carte (Effet Verre/Métal) */
-    .card-preview {
-      width: 100%; height: 180px; border-radius: 15px; margin-bottom: 30px;
-      position: relative; display: flex; justify-content: center; align-items: center;
-      font-weight: 800; font-size: 1.2rem; letter-spacing: 5px;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.5);
-      transition: 0.5s;
-    }
-    .card-item:hover .card-preview { transform: rotateY(10deg) rotateX(10deg); }
-
-    .pcs { background: linear-gradient(135deg, #0054a6, #001d3d); }
-    .nickel { background: linear-gradient(135deg, #ff5f00, #803000); }
-    .revolut { background: linear-gradient(135deg, #222, #000); border: 1px solid #444; }
-    .aurum { background: linear-gradient(135deg, #d4af37, #b8860b); color: #000; }
-
-    .card-item h3 { font-size: 1.8rem; margin-bottom: 10px; font-family: 'Cormorant Garamond', serif; }
-    .price-tag { font-size: 1.5rem; color: var(--gold); margin-bottom: 25px; font-weight: 800; }
+    .product-info h3 { font-size: 1.4rem; margin-bottom: 0.5rem; }
+    .product-info p { color: var(--text-dim); font-size: 0.85rem; margin-bottom: 1.5rem; line-height: 1.4; }
     
-    .buy-btn {
-      width: 100%; padding: 15px; border-radius: 12px; border: none;
-      background: white; color: black; font-weight: bold;
-      text-transform: uppercase; cursor: pointer; transition: 0.3s;
+    .price { font-size: 1.5rem; font-weight: 800; margin-bottom: 1.5rem; color: var(--accent); }
+    
+    .btn-buy {
+      width: 100%; padding: 1rem; border-radius: 12px; border: none;
+      background: var(--accent); color: #000; font-weight: 700;
+      cursor: pointer; text-transform: uppercase; transition: 0.2s;
     }
-    .buy-btn:hover { background: var(--gold); color: white; letter-spacing: 2px; }
-
-    /* --- EFFET DE REVEAL AU SCROLL --- */
-    .reveal { opacity: 0; transform: translateY(50px); transition: 1s all ease; }
-    .reveal.active { opacity: 1; transform: translateY(0); }
+    .btn-buy:hover { background: #fff; transform: scale(1.02); }
 
     /* --- MODAL --- */
     .modal {
       position: fixed; inset: 0; background: rgba(0,0,0,0.95);
       display: none; align-items: center; justify-content: center; z-index: 1000;
-      backdrop-filter: blur(20px);
     }
     .modal-content {
-      background: #111; padding: 3rem; border-radius: 30px;
-      width: 90%; max-width: 450px; border: 1px solid var(--gold);
+      background: #1a1d23; padding: 2.5rem; border-radius: 24px;
+      width: 90%; max-width: 400px; border: 1px solid var(--accent);
     }
-    input { width: 100%; padding: 15px; margin: 10px 0; background: #000; border: 1px solid #222; color: white; border-radius: 10px; }
+    .modal-content input {
+      width: 100%; padding: 1rem; margin-bottom: 1rem;
+      background: #000; border: 1px solid #333; color: #fff; border-radius: 10px;
+    }
+
   </style>
 </head>
 <body>
 
-<nav>
-  <a href="#" class="logo">AURUM</a>
-  <div style="color: var(--gold); font-size: 0.8rem; letter-spacing: 2px;">MEMBERS ONLY</div>
-</nav>
-
-<header class="hero">
-  <h1 class="reveal">L'Elite en Main.</h1>
-  <p class="reveal">Ne vous contentez plus d'une banque banale. Choisissez la performance et la discrétion avec nos cartes premium.</p>
+<header>
+  <p>Services Bancaires Premium</p>
+  <h1>Choisissez Votre Carte</h1>
 </header>
 
-<section class="market-grid">
-  <div class="card-item reveal">
-    <div class="card-preview pcs">PCS CHROME</div>
-    <h3>PCS Mastercard</h3>
-    <div class="price-tag">19 500 FCFA</div>
-    <ul style="list-style:none; color:#666; font-size:0.9rem; margin-bottom:20px;">
-        <li>• Sans vérification de revenus</li>
-        <li>• Recharges illimitées</li>
-    </ul>
-    <button class="buy-btn" onclick="openOrder('PCS Chrome')">Sélectionner</button>
+<div class="container">
+  <div class="product-card">
+    <div class="card-visual pcs-style">PCS CHROME</div>
+    <div class="product-info">
+      <h3>Mastercard PCS</h3>
+      <p>La carte prépayée n°1. Sans compte bancaire, sans engagement. Rechargeable par coupons.</p>
+      <div class="price">19 500 FCFA</div>
+      <button class="btn-buy" onclick="openOrder('PCS Chrome', '19 500')">Commander</button>
+    </div>
   </div>
 
-  <div class="card-item reveal">
-    <div class="card-preview nickel">NICKEL</div>
-    <h3>Nickel Standard</h3>
-    <div class="price-tag">15 000 FCFA</div>
-    <ul style="list-style:none; color:#666; font-size:0.9rem; margin-bottom:20px;">
-        <li>• Relevé d'identité bancaire</li>
-        <li>• Acceptée partout</li>
-    </ul>
-    <button class="buy-btn" onclick="openOrder('Nickel Standard')">Sélectionner</button>
+  <div class="product-card">
+    <div class="card-visual nickel-style">NICKEL</div>
+    <div class="product-info">
+      <h3>Carte Nickel</h3>
+      <p>Un compte et un RIB en 5 minutes. Idéal pour gérer vos virements et paiements en ligne.</p>
+      <div class="price">15 000 FCFA</div>
+      <button class="btn-buy" onclick="openOrder('Nickel Standard', '15 000')">Commander</button>
+    </div>
   </div>
 
-  <div class="card-item reveal">
-    <div class="card-preview revolut">REVOLUT METAL</div>
-    <h3>Revolut Metal</h3>
-    <div class="price-tag">45 900 FCFA</div>
-    <ul style="list-style:none; color:#666; font-size:0.9rem; margin-bottom:20px;">
-        <li>• Carte en acier véritable</li>
-        <li>• Cashback sur chaque achat</li>
-    </ul>
-    <button class="buy-btn" onclick="openOrder('Revolut Metal')">Sélectionner</button>
+  <div class="product-card">
+    <div class="card-visual revolut-style">REVOLUT</div>
+    <div class="product-info">
+      <h3>Revolut Metal</h3>
+      <p>L'excellence technologique. Change de devises gratuit, cashback et assurances voyage incluses.</p>
+      <div class="price">45 000 FCFA</div>
+      <button class="btn-buy" onclick="openOrder('Revolut Metal', '45 000')">Commander</button>
+    </div>
   </div>
 
-  <div class="card-item reveal">
-    <div class="card-preview aurum">AURUM GOLD</div>
-    <h3>Aurum Exclusive</h3>
-    <div class="price-tag">85 000 FCFA</div>
-    <ul style="list-style:none; color:#666; font-size:0.9rem; margin-bottom:20px;">
-        <li>• Plaquée Or 24 Carats</li>
-        <li>• Conciergerie Privée 24/7</li>
-    </ul>
-    <button class="buy-btn" onclick="openOrder('Aurum Gold')">Sélectionner</button>
+  <div class="product-card">
+    <div class="card-visual aurum-style">AURUM</div>
+    <div class="product-info">
+      <h3>Aurum Gold 24K</h3>
+      <p>Le prestige absolu. Carte plaquée or avec service de conciergerie et accès aux salons VIP.</p>
+      <div class="price">95 000 FCFA</div>
+      <button class="btn-buy" onclick="openOrder('Aurum Gold', '95 000')">Commander</button>
+    </div>
   </div>
-</section>
+</div>
 
 <div class="modal" id="orderModal">
   <div class="modal-content">
-    <h2 id="cardTitle" style="font-family: 'Cormorant Garamond'; color: var(--gold); font-size: 2rem;"></h2>
-    <form onsubmit="finishOrder(event)">
-      <input type="text" placeholder="Nom Complet" required>
-      <input type="text" placeholder="Ville de livraison" required>
-      <input type="tel" placeholder="Numéro WhatsApp" required>
-      <button type="submit" class="buy-btn" style="background: var(--gold); color: black; margin-top: 20px;">Confirmer la réservation</button>
-    </
+    <h2 id="modalTitle" style="margin-bottom: 1.5rem;"></h2>
+    <form onsubmit="confirmOrder(event)">
+      <input type="text" placeholder="Nom & Prénom" required>
+      <input type="tel" placeholder="Téléphone (WhatsApp)" required>
+      <input type="text" placeholder="Lieu de livraison" required>
+      <button type="submit" class="btn-buy">Valider l'achat</button>
+    </form>
+    <button onclick="closeOrder()" style="background:none; border:none; color:#888; margin-top:1.5rem; cursor:pointer; width:100%;">Annuler</button>
+  </div>
+</div>
+
+<script>
+  function openOrder(name, price) {
+    document.getElementById('modalTitle').innerText = name + " — " + price + " F";
+    document.getElementById('orderModal').style.display = 'flex';
+  }
+  function closeOrder() {
+    document.getElementById('orderModal').style.display = 'none';
+  }
+  function confirmOrder(e) {
+    e.preventDefault();
+    alert("Votre commande a été reçue ! Un agent vous contactera sur WhatsApp pour le paiement (OM/Moov/Wave).");
+    closeOrder();
+  }
+</script>
+
+</body>
+</html>
