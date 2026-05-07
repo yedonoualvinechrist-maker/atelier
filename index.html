@@ -93,4 +93,168 @@
       transition: 0.4s; border: 1px solid transparent; text-align: center;
     }
     .plan-card:hover { transform: translateY(-10px); border-color: var(--gold); }
-    .plan-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color:
+    .plan-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--gold); margin-bottom: 1rem; }
+    .price { font-size: 1.5rem; font-weight: 600; margin-bottom: 2rem; }
+
+    /* --- BOUTONS --- */
+    .btn {
+      padding: 1rem 2.5rem; border-radius: 50px; text-transform: uppercase;
+      font-size: 0.75rem; font-weight: 600; cursor: pointer; transition: 0.3s;
+      letter-spacing: 1px; text-decoration: none; display: inline-block; border: none;
+    }
+    .btn-gold { background: var(--gold); color: var(--bg-dark); }
+    .btn-gold:hover { background: var(--gold-bright); transform: scale(1.05); }
+
+    /* --- MODAL (FENÊTRE DE COMPTE) --- */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.9);
+      display: none; align-items: center; justify-content: center; z-index: 2000;
+      backdrop-filter: blur(10px);
+    }
+    .modal-content {
+      background: var(--surface); padding: 3rem; width: 90%; max-width: 450px;
+      border-radius: 20px; border: 1px solid var(--gold); text-align: center;
+    }
+    .modal-content h2 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; margin-bottom: 1.5rem; }
+    .modal-content input {
+      width: 100%; padding: 1rem; margin-bottom: 1rem; background: var(--bg-dark);
+      border: 1px solid rgba(255,255,255,0.1); color: white; border-radius: 10px;
+    }
+    .close-modal { margin-top: 1rem; color: var(--muted); cursor: pointer; font-size: 0.8rem; display: block; }
+
+    /* ANIMATIONS */
+    [data-reveal] { opacity: 0; transform: translateY(30px); transition: 1s ease; }
+    .active-reveal { opacity: 1; transform: translateY(0); }
+
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="logo">AURUM</a>
+  <ul class="nav-links">
+    <li><a href="#sim">Simulateur</a></li>
+    <li><a href="#plans">Offres</a></li>
+  </ul>
+  <button class="btn btn-gold" style="padding: 0.6rem 1.5rem;" onclick="openModal()">Ouvrir un compte</button>
+</nav>
+
+<section class="hero">
+  <div class="hero-content">
+    <h1>L'argent est un art, <span>laissez-le briller.</span></h1>
+    <p style="color: var(--muted); margin-bottom: 2.5rem;">
+      Rejoignez l'élite bancaire avec une carte conçue pour transformer vos dépenses en expériences inoubliables.
+    </p>
+    <a href="#plans" class="btn btn-gold">Découvrir les offres</a>
+  </div>
+  <div class="hero-visual">
+    <div class="card-3d" id="card">
+      <div class="card-chip"></div>
+      <div style="font-size: 1.2rem; letter-spacing: 4px; color: rgba(255,255,255,0.8);">**** **** **** 8892</div>
+      <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+        <div>
+          <p style="font-size: 0.6rem; text-transform: uppercase; color: var(--muted);">Titulaire</p>
+          <p style="font-size: 0.9rem; letter-spacing: 1px;">ALEXANDRE MOREAU</p>
+        </div>
+        <p style="font-family: 'Cormorant Garamond', serif; font-weight: bold; color: var(--gold);">AURUM</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="simulator" id="sim">
+  <div data-reveal>
+    <p style="color: var(--gold); text-transform: uppercase; letter-spacing: 3px; font-size: 0.8rem;">Rentabilité</p>
+    <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 3rem; margin: 1rem 0;">Calculez vos <em>gains</em></h2>
+  </div>
+  <div class="sim-container" data-reveal>
+    <p>Dépenses mensuelles :</p>
+    <input type="range" min="100000" max="5000000" step="50000" value="500000" class="range-slider" id="expenseRange">
+    <div style="font-size: 1.5rem; margin-bottom: 2rem;"><span id="expenseVal">500 000</span> FCFA</div>
+    <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem;">
+      <p style="color: var(--muted);">Gain Cashback annuel estimé :</p>
+      <div class="earnings-box"><span id="cashbackVal">300 000</span> FCFA</div>
+    </div>
+  </div>
+</section>
+
+<section class="plans" id="plans">
+  <div class="plan-card" data-reveal>
+    <h3>Argent</h3>
+    <div class="price">9 900 <span>/ mois</span></div>
+    <button class="btn" style="border: 1px solid var(--gold); color: var(--gold); background:none;" onclick="startPayment('Argent')">Choisir Argent</button>
+  </div>
+  <div class="plan-card" style="border-color: var(--gold);" data-reveal>
+    <h3>Or</h3>
+    <div class="price">24 900 <span>/ mois</span></div>
+    <button class="btn btn-gold" onclick="startPayment('Or')">Choisir Or</button>
+  </div>
+  <div class="plan-card" data-reveal>
+    <h3>Platine</h3>
+    <div class="price">59 900 <span>/ mois</span></div>
+    <button class="btn" style="border: 1px solid var(--gold); color: var(--gold); background:none;" onclick="startPayment('Platine')">Choisir Platine</button>
+  </div>
+</section>
+
+<div class="modal-overlay" id="modal">
+  <div class="modal-content">
+    <h2>Devenir Membre</h2>
+    <p style="color: var(--muted); margin-bottom: 2rem; font-size: 0.9rem;">Entrez vos détails pour accéder au prestige.</p>
+    <form onsubmit="handleSignup(event)">
+      <input type="text" placeholder="Nom complet" required>
+      <input type="email" placeholder="Email professionnel" required>
+      <input type="password" placeholder="Mot de passe" required>
+      <button type="submit" class="btn btn-gold" style="width: 100%;">Créer mon compte</button>
+    </form>
+    <span class="close-modal" onclick="closeModal()">Annuler la demande</span>
+  </div>
+</div>
+
+<script>
+  // 3D Card Effect
+  const card = document.getElementById('card');
+  document.addEventListener('mousemove', (e) => {
+    let xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+    let yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+    card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+  });
+
+  // Simulator
+  const range = document.getElementById('expenseRange');
+  const expVal = document.getElementById('expenseVal');
+  const cashVal = document.getElementById('cashbackVal');
+
+  range.addEventListener('input', (e) => {
+    let val = parseInt(e.target.value);
+    expVal.innerText = val.toLocaleString();
+    // Calcul : (Dépense * 5% cashback) * 12 mois
+    cashVal.innerText = (val * 0.05 * 12).toLocaleString();
+  });
+
+  // Modal Logic
+  function openModal() { document.getElementById('modal').style.display = 'flex'; }
+  function closeModal() { document.getElementById('modal').style.display = 'none'; }
+
+  // Simulation de fonctions Back-end
+  function handleSignup(e) {
+    e.preventDefault();
+    alert("Demande envoyée ! Dans une version réelle, vos données seraient envoyées à une base de données sécurisée.");
+    closeModal();
+  }
+
+  function startPayment(plan) {
+    alert("Redirection vers la passerelle sécurisée pour l'offre " + plan + "...");
+    // Ici, on mettrait : window.location.href = "Lien_Stripe_Ou_Paypal";
+  }
+
+  // Scroll Reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('active-reveal');
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
