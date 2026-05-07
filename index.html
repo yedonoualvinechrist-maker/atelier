@@ -3,257 +3,165 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AURUM CARD — L'excellence au quotidien</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+  <title>AURUM — Boutique Officielle Cartes Premium</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
     :root {
       --gold: #D4AF37;
-      --gold-bright: #FFD700;
-      --bg-dark: #121417;
-      --surface: #1E2126;
-      --text: #F8F9FA;
-      --muted: #A0A0A0;
-      --accent: rgba(212, 175, 55, 0.15);
+      --bg-dark: #0a0b0d;
+      --surface: #16181d;
+      --text: #ffffff;
+      --pcs-chrome: #0054a6;
+      --nickel-orange: #ff5f00;
+      --revolut-black: #191c1f;
     }
 
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      background-color: var(--bg-dark);
-      color: var(--text);
-      font-family: 'Montserrat', sans-serif;
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background-color: var(--bg-dark); color: var(--text); font-family: 'Montserrat', sans-serif; }
 
-    /* --- NAVIGATION --- */
     nav {
-      position: fixed; top: 0; width: 100%; z-index: 1000;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 1.5rem 5%;
-      backdrop-filter: blur(15px);
-      background: rgba(18, 20, 23, 0.8);
-      border-bottom: 1px solid rgba(255,255,255,0.05);
+      padding: 1.5rem 5%; display: flex; justify-content: space-between; align-items: center;
+      background: rgba(10, 11, 13, 0.9); sticky; top: 0; z-index: 100;
     }
-    .logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.8rem; font-weight: 600; letter-spacing: 2px;
-      color: var(--gold); text-decoration: none;
-    }
-    .nav-links { display: flex; gap: 3rem; list-style: none; }
-    .nav-links a {
-      text-decoration: none; color: var(--text); font-size: 0.75rem;
-      text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;
-    }
-    .nav-links a:hover { color: var(--gold); }
+    .logo { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--gold); text-decoration: none; font-weight: bold; }
 
-    /* --- HERO --- */
-    .hero {
-      height: 100vh; display: flex; align-items: center; justify-content: center;
-      padding: 0 5%; background: radial-gradient(circle at top right, #1e2530 0%, var(--bg-dark) 60%);
-    }
-    .hero-content { flex: 1; max-width: 600px; }
-    .hero-visual { flex: 1; display: flex; justify-content: center; perspective: 1000px; }
+    .header-info { text-align: center; padding: 4rem 5%; }
+    .header-info h1 { font-family: 'Cormorant Garamond', serif; font-size: 3rem; margin-bottom: 1rem; }
 
-    .hero h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.5rem, 6vw, 5rem); line-height: 1.1; margin-bottom: 1.5rem;
-    }
-    .hero h1 span { color: var(--gold); font-style: italic; }
-
-    /* --- CARTE 3D --- */
-    .card-3d {
-      width: 400px; height: 250px;
-      background: linear-gradient(135deg, #2c2c2c 0%, #000 100%);
-      border-radius: 20px; position: relative;
-      box-shadow: 0 25px 50px rgba(0,0,0,0.5);
-      transition: transform 0.1s ease-out;
-      transform-style: preserve-3d;
-      padding: 2rem; display: flex; flex-direction: column; justify-content: space-between;
-      border: 1px solid rgba(255,255,255,0.1);
-    }
-    .card-chip {
-      width: 50px; height: 40px; background: linear-gradient(135deg, #e0c068, #b8860b);
-      border-radius: 8px;
+    /* --- GRILLE DES CARTES --- */
+    .market-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem; padding: 2rem 5%;
     }
 
-    /* --- SIMULATEUR --- */
-    .simulator { padding: 6rem 5%; background: var(--surface); text-align: center; }
-    .sim-container {
-      max-width: 800px; margin: 3rem auto;
-      background: var(--bg-dark); padding: 3rem; border-radius: 20px;
-      border: 1px solid var(--accent);
+    .card-item {
+      background: var(--surface);
+      border-radius: 20px;
+      padding: 2rem;
+      border: 1px solid rgba(255,255,255,0.05);
+      transition: 0.3s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
-    .range-slider { width: 100%; margin: 2rem 0; accent-color: var(--gold); cursor: pointer; }
-    .earnings-box { font-size: 2.5rem; font-family: 'Cormorant Garamond', serif; color: var(--gold); }
+    .card-item:hover { transform: translateY(-10px); border-color: var(--gold); }
 
-    /* --- OFFRES --- */
-    .plans { padding: 6rem 5%; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-    .plan-card {
-      background: var(--surface); padding: 3rem 2rem; border-radius: 20px;
-      transition: 0.4s; border: 1px solid transparent; text-align: center;
+    /* Rendu visuel de la carte */
+    .card-preview {
+      width: 260px; height: 160px;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+      position: relative;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      font-weight: bold; letter-spacing: 2px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.4);
     }
-    .plan-card:hover { transform: translateY(-10px); border-color: var(--gold); }
-    .plan-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--gold); margin-bottom: 1rem; }
-    .price { font-size: 1.5rem; font-weight: 600; margin-bottom: 2rem; }
 
-    /* --- BOUTONS --- */
-    .btn {
-      padding: 1rem 2.5rem; border-radius: 50px; text-transform: uppercase;
-      font-size: 0.75rem; font-weight: 600; cursor: pointer; transition: 0.3s;
-      letter-spacing: 1px; text-decoration: none; display: inline-block; border: none;
+    /* Styles spécifiques aux marques */
+    .type-pcs { background: linear-gradient(135deg, #0054a6, #002d5a); }
+    .type-nickel { background: linear-gradient(135deg, #ff5f00, #c44900); }
+    .type-revolut { background: linear-gradient(135deg, #191c1f, #434343); border: 1px solid #ffffff33; }
+    .type-aurum { background: linear-gradient(135deg, #d4af37, #8a6d3b); color: #000; }
+
+    .card-item h3 { margin-bottom: 0.5rem; font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; }
+    .price-tag { color: var(--gold); font-weight: bold; font-size: 1.2rem; margin-bottom: 1.5rem; }
+    
+    .buy-btn {
+      width: 100%; padding: 0.8rem; border-radius: 50px;
+      border: none; background: var(--gold); color: black;
+      font-weight: bold; cursor: pointer; text-transform: uppercase;
+      transition: 0.3s;
     }
-    .btn-gold { background: var(--gold); color: var(--bg-dark); }
-    .btn-gold:hover { background: var(--gold-bright); transform: scale(1.05); }
+    .buy-btn:hover { background: #ffdb70; }
 
-    /* --- MODAL (FENÊTRE DE COMPTE) --- */
-    .modal-overlay {
+    /* --- MODAL --- */
+    .modal {
       position: fixed; inset: 0; background: rgba(0,0,0,0.9);
-      display: none; align-items: center; justify-content: center; z-index: 2000;
-      backdrop-filter: blur(10px);
+      display: none; align-items: center; justify-content: center; z-index: 1000;
     }
     .modal-content {
-      background: var(--surface); padding: 3rem; width: 90%; max-width: 450px;
-      border-radius: 20px; border: 1px solid var(--gold); text-align: center;
+      background: var(--surface); padding: 2.5rem; border-radius: 20px;
+      max-width: 400px; width: 90%; text-align: center; border: 1px solid var(--gold);
     }
-    .modal-content h2 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; margin-bottom: 1.5rem; }
     .modal-content input {
-      width: 100%; padding: 1rem; margin-bottom: 1rem; background: var(--bg-dark);
-      border: 1px solid rgba(255,255,255,0.1); color: white; border-radius: 10px;
+      width: 100%; padding: 0.8rem; margin: 0.5rem 0;
+      background: #000; border: 1px solid #333; color: white; border-radius: 8px;
     }
-    .close-modal { margin-top: 1rem; color: var(--muted); cursor: pointer; font-size: 0.8rem; display: block; }
-
-    /* ANIMATIONS */
-    [data-reveal] { opacity: 0; transform: translateY(30px); transition: 1s ease; }
-    .active-reveal { opacity: 1; transform: translateY(0); }
-
   </style>
 </head>
 <body>
 
 <nav>
-  <a href="#" class="logo">AURUM</a>
-  <ul class="nav-links">
-    <li><a href="#sim">Simulateur</a></li>
-    <li><a href="#plans">Offres</a></li>
-  </ul>
-  <button class="btn btn-gold" style="padding: 0.6rem 1.5rem;" onclick="openModal()">Ouvrir un compte</button>
+  <a href="#" class="logo">AURUM LUXE</a>
 </nav>
 
-<section class="hero">
-  <div class="hero-content">
-    <h1>L'argent est un art, <span>laissez-le briller.</span></h1>
-    <p style="color: var(--muted); margin-bottom: 2.5rem;">
-      Rejoignez l'élite bancaire avec une carte conçue pour transformer vos dépenses en expériences inoubliables.
-    </p>
-    <a href="#plans" class="btn btn-gold">Découvrir les offres</a>
+<div class="header-info">
+  <h1>Catalogue des Cartes Privilèges</h1>
+  <p style="color: #888;">Sélectionnez votre carte et recevez-la sous 48h.</p>
+</div>
+
+<section class="market-grid">
+  <div class="card-item">
+    <div class="card-preview type-pcs">PCS CHROME</div>
+    <h3>PCS Mastercard</h3>
+    <p style="font-size: 0.8rem; color: #888; margin-bottom: 1rem;">Sans engagement, recharge immédiate.</p>
+    <div class="price-tag">19 500 FCFA</div>
+    <button class="buy-btn" onclick="openOrder('PCS Chrome')">Acheter maintenant</button>
   </div>
-  <div class="hero-visual">
-    <div class="card-3d" id="card">
-      <div class="card-chip"></div>
-      <div style="font-size: 1.2rem; letter-spacing: 4px; color: rgba(255,255,255,0.8);">**** **** **** 8892</div>
-      <div style="display: flex; justify-content: space-between; align-items: flex-end;">
-        <div>
-          <p style="font-size: 0.6rem; text-transform: uppercase; color: var(--muted);">Titulaire</p>
-          <p style="font-size: 0.9rem; letter-spacing: 1px;">ALEXANDRE MOREAU</p>
-        </div>
-        <p style="font-family: 'Cormorant Garamond', serif; font-weight: bold; color: var(--gold);">AURUM</p>
-      </div>
-    </div>
+
+  <div class="card-item">
+    <div class="card-preview type-nickel">NICKEL</div>
+    <h3>Nickel Standard</h3>
+    <p style="font-size: 0.8rem; color: #888; margin-bottom: 1rem;">Ouverture de compte en 5 minutes.</p>
+    <div class="price-tag">15 000 FCFA</div>
+    <button class="buy-btn" onclick="openOrder('Nickel Standard')">Acheter maintenant</button>
+  </div>
+
+  <div class="card-item">
+    <div class="card-preview type-revolut">REVOLUT METAL</div>
+    <h3>Revolut Metal</h3>
+    <p style="font-size: 0.8rem; color: #888; margin-bottom: 1rem;">Carte en acier, cashback illimité.</p>
+    <div class="price-tag">45 900 FCFA</div>
+    <button class="buy-btn" onclick="openOrder('Revolut Metal')">Acheter maintenant</button>
+  </div>
+
+  <div class="card-item">
+    <div class="card-preview type-aurum">AURUM GOLD</div>
+    <h3>Aurum Exclusive</h3>
+    <p style="font-size: 0.8rem; color: #888; margin-bottom: 1rem;">Plaqué or 24K, conciergerie privée.</p>
+    <div class="price-tag">85 000 FCFA</div>
+    <button class="buy-btn" onclick="openOrder('Aurum Gold')">Acheter maintenant</button>
   </div>
 </section>
 
-<section class="simulator" id="sim">
-  <div data-reveal>
-    <p style="color: var(--gold); text-transform: uppercase; letter-spacing: 3px; font-size: 0.8rem;">Rentabilité</p>
-    <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 3rem; margin: 1rem 0;">Calculez vos <em>gains</em></h2>
-  </div>
-  <div class="sim-container" data-reveal>
-    <p>Dépenses mensuelles :</p>
-    <input type="range" min="100000" max="5000000" step="50000" value="500000" class="range-slider" id="expenseRange">
-    <div style="font-size: 1.5rem; margin-bottom: 2rem;"><span id="expenseVal">500 000</span> FCFA</div>
-    <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem;">
-      <p style="color: var(--muted);">Gain Cashback annuel estimé :</p>
-      <div class="earnings-box"><span id="cashbackVal">300 000</span> FCFA</div>
-    </div>
-  </div>
-</section>
-
-<section class="plans" id="plans">
-  <div class="plan-card" data-reveal>
-    <h3>Argent</h3>
-    <div class="price">9 900 <span>/ mois</span></div>
-    <button class="btn" style="border: 1px solid var(--gold); color: var(--gold); background:none;" onclick="startPayment('Argent')">Choisir Argent</button>
-  </div>
-  <div class="plan-card" style="border-color: var(--gold);" data-reveal>
-    <h3>Or</h3>
-    <div class="price">24 900 <span>/ mois</span></div>
-    <button class="btn btn-gold" onclick="startPayment('Or')">Choisir Or</button>
-  </div>
-  <div class="plan-card" data-reveal>
-    <h3>Platine</h3>
-    <div class="price">59 900 <span>/ mois</span></div>
-    <button class="btn" style="border: 1px solid var(--gold); color: var(--gold); background:none;" onclick="startPayment('Platine')">Choisir Platine</button>
-  </div>
-</section>
-
-<div class="modal-overlay" id="modal">
+<div class="modal" id="orderModal">
   <div class="modal-content">
-    <h2>Devenir Membre</h2>
-    <p style="color: var(--muted); margin-bottom: 2rem; font-size: 0.9rem;">Entrez vos détails pour accéder au prestige.</p>
-    <form onsubmit="handleSignup(event)">
+    <h2 id="cardTitle" style="color: var(--gold);"></h2>
+    <p style="font-size: 0.8rem; margin: 1rem 0;">Veuillez remplir vos informations de livraison.</p>
+    <form onsubmit="finishOrder(event)">
       <input type="text" placeholder="Nom complet" required>
-      <input type="email" placeholder="Email professionnel" required>
-      <input type="password" placeholder="Mot de passe" required>
-      <button type="submit" class="btn btn-gold" style="width: 100%;">Créer mon compte</button>
+      <input type="text" placeholder="Ville et quartier" required>
+      <input type="tel" placeholder="Numéro de téléphone" required>
+      <button type="submit" class="buy-btn" style="margin-top: 1rem;">Valider la commande</button>
     </form>
-    <span class="close-modal" onclick="closeModal()">Annuler la demande</span>
+    <p onclick="closeOrder()" style="margin-top: 1rem; cursor: pointer; font-size: 0.7rem; color: #888;">Annuler</p>
   </div>
 </div>
 
 <script>
-  // 3D Card Effect
-  const card = document.getElementById('card');
-  document.addEventListener('mousemove', (e) => {
-    let xAxis = (window.innerWidth / 2 - e.pageX) / 25;
-    let yAxis = (window.innerHeight / 2 - e.pageY) / 25;
-    card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
-  });
-
-  // Simulator
-  const range = document.getElementById('expenseRange');
-  const expVal = document.getElementById('expenseVal');
-  const cashVal = document.getElementById('cashbackVal');
-
-  range.addEventListener('input', (e) => {
-    let val = parseInt(e.target.value);
-    expVal.innerText = val.toLocaleString();
-    // Calcul : (Dépense * 5% cashback) * 12 mois
-    cashVal.innerText = (val * 0.05 * 12).toLocaleString();
-  });
-
-  // Modal Logic
-  function openModal() { document.getElementById('modal').style.display = 'flex'; }
-  function closeModal() { document.getElementById('modal').style.display = 'none'; }
-
-  // Simulation de fonctions Back-end
-  function handleSignup(e) {
+  function openOrder(name) {
+    document.getElementById('cardTitle').innerText = name;
+    document.getElementById('orderModal').style.display = 'flex';
+  }
+  function closeOrder() {
+    document.getElementById('orderModal').style.display = 'none';
+  }
+  function finishOrder(e) {
     e.preventDefault();
-    alert("Demande envoyée ! Dans une version réelle, vos données seraient envoyées à une base de données sécurisée.");
-    closeModal();
+    alert("Commande enregistrée ! Redirection vers le paiement mobile (Orange Money / Moov)...");
+    closeOrder();
   }
-
-  function startPayment(plan) {
-    alert("Redirection vers la passerelle sécurisée pour l'offre " + plan + "...");
-    // Ici, on mettrait : window.location.href = "Lien_Stripe_Ou_Paypal";
-  }
-
-  // Scroll Reveal
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) entry.target.classList.add('active-reveal');
-    });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
 </script>
 
 </body>
