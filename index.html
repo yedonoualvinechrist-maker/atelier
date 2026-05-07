@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DUNDLE DARK — Boutique Complète</title>
+  <title>DUNDLE DARK — Catalogue Complet</title>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -16,56 +16,52 @@
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg-deep); color: var(--text-white); }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg-deep); color: var(--text-white); line-height: 1.6; }
 
     /* --- NAVIGATION --- */
     header { background: rgba(15, 17, 21, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; }
     .nav-top { display: flex; justify-content: space-between; align-items: center; padding: 1rem 8%; }
     .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary); text-decoration: none; }
-    .cart-status { background: var(--bg-card); padding: 8px 20px; border-radius: 50px; border: 1px solid var(--border); font-weight: 600; }
+    .cart-status { background: var(--bg-card); padding: 8px 20px; border-radius: 50px; border: 1px solid var(--border); cursor: pointer; transition: 0.3s; font-weight: 600; }
 
     /* --- HERO --- */
     .hero { padding: 4rem 8% 1rem; text-align: center; }
     .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; }
 
-    /* --- GRILLE DE PRODUITS --- */
+    /* --- GRILLE --- */
     .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; padding: 2rem 8% 5rem; }
     
     .card { background: var(--bg-card); border-radius: 20px; overflow: hidden; border: 1px solid var(--border); transition: 0.4s; }
-    .card:hover { transform: translateY(-10px); border-color: var(--primary); box-shadow: 0 15px 30px rgba(0,0,0,0.5); }
+    .card:hover { transform: translateY(-10px); border-color: var(--primary); }
     
     .card-banner { height: 140px; display: flex; align-items: center; justify-content: center; position: relative; }
-    .card-banner b { z-index: 2; transform: rotate(-5deg); font-size: 1.2rem; text-transform: uppercase; }
+    .card-banner b { z-index: 2; transform: rotate(-5deg); font-size: 1.3rem; }
     .card-banner::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, var(--bg-card), transparent); }
 
     .card-body { padding: 20px; }
-    .price { font-weight: 800; font-size: 1.3rem; color: var(--primary); margin: 10px 0; }
+    .price { font-weight: 800; font-size: 1.2rem; color: var(--primary); margin: 10px 0; }
     
     .btn-buy { 
       width: 100%; background: var(--primary); color: white; border: none; 
       padding: 12px; border-radius: 12px; font-weight: 700; cursor: pointer; transition: 0.2s;
     }
-    .btn-buy:hover { background: #ff7a3d; }
 
     /* --- PIED DE PAGE (FOOTER) --- */
     footer { background: #08090b; border-top: 1px solid var(--border); padding: 5rem 8% 2rem; margin-top: 4rem; }
-    .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 3rem; text-align: left; }
-    .footer-col h4 { color: var(--text-white); margin-bottom: 1.2rem; font-size: 1rem; }
+    .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 40px; margin-bottom: 4rem; text-align: left; }
+    .footer-col h4 { color: var(--text-white); margin-bottom: 1.5rem; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; }
     .footer-col ul { list-style: none; }
-    .footer-col ul li { margin-bottom: 10px; }
-    .footer-col a { color: var(--text-gray); text-decoration: none; font-size: 0.85rem; transition: 0.3s; }
-    .footer-col a:hover { color: var(--primary); }
+    .footer-col ul li { margin-bottom: 10px; color: var(--text-gray); font-size: 0.85rem; cursor: pointer; transition: 0.3s; }
+    .footer-col ul li:hover { color: var(--primary); }
 
-    .social-links { display: flex; gap: 15px; margin-top: 10px; }
-    .social-btn { padding: 8px 15px; border-radius: 8px; background: #1a1d23; color: white; text-decoration: none; font-size: 0.8rem; border: 1px solid var(--border); }
-    .social-btn:hover { border-color: var(--primary); color: var(--primary); }
-
-    .footer-bottom { border-top: 1px solid var(--border); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; font-size: 0.8rem; color: #555; }
+    .footer-bottom { border-top: 1px solid var(--border); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+    .payment-methods { display: flex; gap: 15px; filter: grayscale(1); opacity: 0.6; }
+    .payment-methods span { font-size: 0.7rem; font-weight: 800; border: 1px solid #fff; padding: 2px 6px; border-radius: 4px; }
 
     /* MODAL */
     .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.95); display: none; align-items: center; justify-content: center; z-index: 2000; }
-    .modal-content { background: var(--bg-card); padding: 2rem; border-radius: 20px; width: 90%; max-width: 400px; border: 1px solid var(--primary); text-align: center; }
-    .modal-content input { width: 100%; padding: 12px; margin-bottom: 10px; background: #000; border: 1px solid var(--border); color: white; border-radius: 8px; }
+    .modal-content { background: var(--bg-card); padding: 2.5rem; border-radius: 24px; width: 95%; max-width: 400px; border: 1px solid var(--primary); }
+    .modal-content input { width: 100%; padding: 12px; margin-bottom: 10px; background: #000; border: 1px solid var(--border); color: white; border-radius: 10px; }
   </style>
 </head>
 <body>
@@ -78,38 +74,11 @@
 </header>
 
 <main class="hero">
-  <h1>Catalogue Premium</h1>
-  <p style="color: var(--text-gray);">Toutes vos cartes préférées en un seul endroit.</p>
+  <h1>Recharges & Cartes de paiement</h1>
+  <p style="color: var(--text-gray);">Livraison instantanée par e-mail, 24h/24 et 7j/7.</p>
 </main>
 
 <div class="products-grid">
-  <div class="card">
-    <div class="card-banner" style="background: #0054a6;"><b>PCS Mastercard</b></div>
-    <div class="card-body">
-      <h3>Recharge PCS</h3>
-      <div class="price">19 500 F</div>
-      <button class="btn-buy" onclick="openOrder('PCS Chrome', '19 500')">ACHETER</button>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-banner" style="background: #ff5f00;"><b>Nickel</b></div>
-    <div class="card-body">
-      <h3>Carte Nickel</h3>
-      <div class="price">15 000 F</div>
-      <button class="btn-buy" onclick="openOrder('Nickel', '15 000')">ACHETER</button>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-banner" style="background: #2c3e50;"><b>Revolut Metal</b></div>
-    <div class="card-body">
-      <h3>Revolut Premium</h3>
-      <div class="price">45 000 F</div>
-      <button class="btn-buy" onclick="openOrder('Revolut', '45 000')">ACHETER</button>
-    </div>
-  </div>
-
   <div class="card">
     <div class="card-banner" style="background: #fca311;"><b>CASHlib</b></div>
     <div class="card-body">
@@ -138,9 +107,27 @@
   </div>
 
   <div class="card">
-    <div class="card-banner" style="background: #ff9900;"><b style="color:#000">Amazon</b></div>
+    <div class="card-banner" style="background: #00a8ff;"><b>Neosurf</b></div>
     <div class="card-body">
-      <h3>Carte Amazon</h3>
+      <h3>Code Neosurf</h3>
+      <div class="price">10 000 F</div>
+      <button class="btn-buy" onclick="openOrder('Neosurf', '10 000')">ACHETER</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-banner" style="background: #2f3542;"><b>PCS Chrome</b></div>
+    <div class="card-body">
+      <h3>Recharge PCS</h3>
+      <div class="price">25 000 F</div>
+      <button class="btn-buy" onclick="openOrder('PCS', '25 000')">ACHETER</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-banner" style="background: #ff9900;"><b style="color: #000;">Amazon</b></div>
+    <div class="card-body">
+      <h3>Carte Cadeau Amazon</h3>
       <div class="price">33 000 F</div>
       <button class="btn-buy" onclick="openOrder('Amazon', '33 000')">ACHETER</button>
     </div>
@@ -156,20 +143,11 @@
   </div>
 
   <div class="card">
-    <div class="card-banner" style="background: #003087;"><b>PSN</b></div>
+    <div class="card-banner" style="background: #003087;"><b>PSN Card</b></div>
     <div class="card-body">
       <h3>PlayStation Store</h3>
       <div class="price">20 000 F</div>
       <button class="btn-buy" onclick="openOrder('PSN', '20 000')">ACHETER</button>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-banner" style="background: #d4af37;"><b style="color:#000">Aurum Gold</b></div>
-    <div class="card-body">
-      <h3>Aurum Exclusive</h3>
-      <div class="price">95 000 F</div>
-      <button class="btn-buy" onclick="openOrder('Aurum Gold', '95 000')">ACHETER</button>
     </div>
   </div>
 </div>
@@ -180,43 +158,55 @@
     <p id="modalPrice" style="color: var(--text-gray); margin-bottom: 20px;"></p>
     <form onsubmit="handlePayment(event)">
       <input type="text" placeholder="Nom complet" required>
-      <input type="email" placeholder="Email pour le code" required>
-      <input type="tel" placeholder="Numéro WhatsApp" required>
-      <button type="submit" class="btn-buy">COMMANDER</button>
+      <input type="email" placeholder="Email de réception" required>
+      <button type="submit" class="btn-buy">CONFIRMER</button>
     </form>
-    <button onclick="closeOrder()" style="background:none; border:none; color:var(--text-gray); margin-top:15px; cursor:pointer;">Annuler</button>
+    <button onclick="closeOrder()" style="background:none; border:none; color:var(--text-gray); margin-top:15px; cursor:pointer; width:100%;">Annuler</button>
   </div>
 </div>
 
 <footer>
   <div class="footer-grid">
     <div class="footer-col">
-      <h4>Navigation</h4>
+      <h4>Produits</h4>
       <ul>
-        <li><a href="#">Accueil</a></li>
-        <li><a href="#">Cartes de Paiement</a></li>
-        <li><a href="#">Cartes Cadeaux</a></li>
+        <li>Cartes de paiement</li>
+        <li>Jeux Vidéo</li>
+        <li>Cartes Cadeaux</li>
+        <li>Recharges Mobiles</li>
       </ul>
     </div>
     <div class="footer-col">
-      <h4>Aide</h4>
+      <h4>Support</h4>
       <ul>
-        <li><a href="#">Service Client</a></li>
-        <li><a href="#">Comment ça marche ?</a></li>
-        <li><a href="#">FAQ</a></li>
+        <li>Service Client</li>
+        <li>Vérifier mon code</li>
+        <li>Comment ça marche</li>
+        <li>Contact</li>
       </ul>
     </div>
     <div class="footer-col">
-      <h4>Contactez-nous</h4>
-      <div class="social-links">
-        <a href="https://wa.me/TON_NUMERO" class="social-btn">WhatsApp</a>
-        <a href="https://facebook.com/TON_PROFIL" class="social-btn">Facebook</a>
-      </div>
+      <h4>Légal</h4>
+      <ul>
+        <li>Conditions Générales</li>
+        <li>Confidentialité</li>
+        <li>Cookies</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Suivez-nous</h4>
+      <ul>
+        <li>Facebook</li>
+        <li>Instagram</li>
+        <li>Twitter / X</li>
+      </ul>
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2026 Dundle Dark - Tous droits réservés.</p>
-    <p>Visa | MasterCard | Orange | Wave | Moov</p>
+    <p>© 2026 Dundle Dark. Tous droits réservés.</p>
+    <div class="payment-methods">
+      <span>VISA</span><span>MASTERCARD</span><span>OM</span><span>WAVE</span><span>MOOV</span>
+    </div>
   </div>
 </footer>
 
@@ -232,7 +222,7 @@
     e.preventDefault();
     cart++;
     document.getElementById('cartCount').innerText = cart;
-    alert("Commande envoyée ! Nous vous contactons sur WhatsApp.");
+    alert("Commande enregistrée !");
     closeOrder();
   }
 </script>
